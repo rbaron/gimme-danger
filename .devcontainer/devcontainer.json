@@ -1,0 +1,16 @@
+{
+  "name": "Gimme Danger!! Devcontainer",
+	"image": "ghcr.io/zephyrproject-rtos/zephyr-build:latest",
+  "containerEnv": {
+  },
+  "mounts": [
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-vscode.cpptools"],
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      }
+    }
+  }
+}
