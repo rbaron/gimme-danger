@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "FUSB302MPX")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/FUSB302MPX.kicad_sym")(options "")(descr ""))
+  (lib (name "TPD6S300RUKR")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPD6S300RUKR.kicad_sym")(options "")(descr ""))
+  (lib (name "U261-241N-4BS2SS")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/U261-241N-4BS2SS.kicad_sym")(options "")(descr ""))
+)
