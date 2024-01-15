@@ -5,6 +5,13 @@
   )
 
   (paper "A4")
+  (title_block
+    (title "gimme-danger")
+    (date "2024-01-15")
+    (rev "0.0.1a")
+    (company "rbaron.net")
+  )
+
   (layers
     (0 "F.Cu" signal)
     (31 "B.Cu" signal)

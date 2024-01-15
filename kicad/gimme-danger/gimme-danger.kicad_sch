@@ -4,6 +4,13 @@
 
   (paper "A4")
 
+  (title_block
+    (title "gimme-danger")
+    (date "2024-01-15")
+    (rev "0.0.1a")
+    (company "rbaron.net")
+  )
+
   (lib_symbols
     (symbol "FUSB302MPX:FUSB302MPX" (in_bom yes) (on_board yes)
       (property "Reference" "KEY" (at 0 1.27 0)
