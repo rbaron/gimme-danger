@@ -4,4 +4,8 @@
   (lib (name "TPD6S300RUKR")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPD6S300RUKR.kicad_sym")(options "")(descr ""))
   (lib (name "U261-241N-4BS2SS")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/U261-241N-4BS2SS.kicad_sym")(options "")(descr ""))
   (lib (name "NX20P5090UKAZ")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/NX20P5090UKAZ.kicad_sym")(options "")(descr ""))
+  (lib (name "TPS62175DQCR")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPS62175DQCR.kicad_sym")(options "")(descr ""))
+  (lib (name "MGFL2012F100MT-LF")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/MGFL2012F100MT-LF.kicad_sym")(options "")(descr ""))
+  (lib (name "TPS62177DQCR")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPS62177DQCR.kicad_sym")(options "")(descr ""))
+  (lib (name "SKRKAEE020")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/SKRKAEE020.kicad_sym")(options "")(descr ""))
 )
