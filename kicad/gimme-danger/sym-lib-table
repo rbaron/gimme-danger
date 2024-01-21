@@ -8,4 +8,6 @@
   (lib (name "MGFL2012F100MT-LF")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/MGFL2012F100MT-LF.kicad_sym")(options "")(descr ""))
   (lib (name "TPS62177DQCR")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPS62177DQCR.kicad_sym")(options "")(descr ""))
   (lib (name "SKRKAEE020")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/SKRKAEE020.kicad_sym")(options "")(descr ""))
+  (lib (name "YNR6045-470M")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/YNR6045-470M.kicad_sym")(options "")(descr ""))
+  (lib (name "TPS54302DDCR_C311983")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPS54302DDCR_C311983.kicad_sym")(options "")(descr ""))
 )
