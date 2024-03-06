@@ -10,4 +10,6 @@
   (lib (name "SKRKAEE020")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/SKRKAEE020.kicad_sym")(options "")(descr ""))
   (lib (name "YNR6045-470M")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/YNR6045-470M.kicad_sym")(options "")(descr ""))
   (lib (name "TPS54302DDCR_C311983")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/TPS54302DDCR_C311983.kicad_sym")(options "")(descr ""))
+  (lib (name "AO4407A")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/AO4407A.kicad_sym")(options "")(descr ""))
+  (lib (name "DDTC143EUA-7-F")(type "KiCad")(uri "${KIPRJMOD}/lib/jlcpcb/symbol/DDTC143EUA-7-F.kicad_sym")(options "")(descr ""))
 )
