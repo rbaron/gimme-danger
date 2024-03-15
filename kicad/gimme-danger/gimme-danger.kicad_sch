@@ -1813,7 +1813,6 @@
     )
   )
 
-
   (junction (at 14.605 36.83) (diameter 0) (color 0 0 0 0)
     (uuid 01d5c94e-6f56-4628-bc4b-54e957404dda)
   )
@@ -2483,6 +2482,11 @@
   (text "UART" (at 152.4 17.145 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0c187532-ef97-46cc-8798-e601c8cf7996)
+  )
+  (text "Errors with v0.0.1:\n- C14 connected after L2. It would be before\n- L2 too big? 47nH in luz, 470nH here. Problem or better?\n  - Does not seem to matter\n- Missing Rdown on CC1??\n  - But FUSB doesnt seem to require it? It's the default port setting?\n- C6 should be 22u not 22n"
+    (at 307.34 107.95 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 484b981b-5381-4d61-90cf-cf24e4d0cfac)
   )
   (text "USB-C Connector" (at 26.67 130.175 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
