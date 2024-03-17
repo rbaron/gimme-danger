@@ -2483,7 +2483,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0c187532-ef97-46cc-8798-e601c8cf7996)
   )
-  (text "Errors with v0.0.1:\n- C14 connected after L2. It would be before\n- L2 too big? 47nH in luz, 470nH here. Problem or better?\n  - Does not seem to matter\n- Missing Rdown on CC1??\n  - But FUSB doesnt seem to require it? It's the default port setting?\n- C6 should be 22u not 22n"
+  (text "Errors with v0.0.1:\n- C14 connected after L2. It would be before\n- L2 too big? 47nH in luz, 470nH here. Problem or better?\n  - Does not seem to matter\n- Missing Rdown on CC1??\n  - But FUSB doesnt seem to require it? It's the default port setting?\n- C6 should be 22u not 22n\n- TPD6S300RUKR does not forward CC if not powered? Caused power to not be on? :|\n  - I shorted CC1 and CC and it worked...\n- Diode on 3.3V >| 20V (so we don't blow if we accidentally hook up 3.3V while powered via VBUS)"
     (at 307.34 107.95 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 484b981b-5381-4d61-90cf-cf24e4d0cfac)

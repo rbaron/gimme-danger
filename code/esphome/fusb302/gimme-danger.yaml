@@ -1,0 +1,79 @@
+esphome:
+  name: gimmedanger
+  friendly_name: gimmedanger
+
+esp32:
+  board: esp32-s3-devkitc-1
+  flash_size: 4MB
+
+i2c:
+  sda: GPIO8
+  scl: GPIO9
+  scan: True
+  id: i2c_bus
+
+# Enable logging
+logger:
+  # By default, ESP32-S3 uses USB-CDC for logging.
+  hardware_uart: UART0
+  level: VERBOSE
+  logs:
+    ledc.output: WARN
+    light: WARN
+    api: WARN
+    api.connection: WARN
+    logger: WARN
+    ota: WARN
+    wifi: WARN
+    i2c.arduino: WARN
+    app: WARN
+
+# logger:
+#   # By default, ESP32-S3 uses USB-CDC for logging.
+#   hardware_uart: UART0
+#   level: ERROR
+
+output:
+  - platform: gpio
+    pin:
+      number: 13
+      mode: output
+    id: yellow_led
+  - platform: gpio
+    pin:
+      number: 14
+      mode: output
+    id: red_led
+
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: load_siwtch
+
+sensor:
+  name: "Vout Voltage"
+  attenuation: 11db
+  platform: adc
+  pin: GPIO2
+  filters:
+    # Account for 1/11 voltage divider.
+    - multiply: 11.0
+
+fusb302:
+  interrupt_pin: GPIO10
+  voltage: 9000 mV
+  current: 1000 mA
+  on_pd_negotiation_success:
+    then:
+      - output.turn_on: yellow_led
+      - output.turn_off: red_led
+      - switch.turn_on: load_siwtch
+      - lambda: |-
+          ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+  on_pd_negotiation_failure:
+    then:
+      - output.turn_off: yellow_led
+      - output.turn_on: red_led
+      - switch.turn_off: load_siwtch
+      - lambda: |-
+          ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
