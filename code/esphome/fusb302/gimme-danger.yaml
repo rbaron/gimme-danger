@@ -48,7 +48,7 @@ output:
 switch:
   - platform: gpio
     pin: GPIO12
-    id: load_siwtch
+    id: load_switch
 
 sensor:
   name: "Vout Voltage"
@@ -61,19 +61,19 @@ sensor:
 
 fusb302:
   interrupt_pin: GPIO10
-  voltage: 9000 mV
+  voltage: 7000 mV
   current: 1000 mA
   on_pd_negotiation_success:
     then:
       - output.turn_on: yellow_led
       - output.turn_off: red_led
-      - switch.turn_on: load_siwtch
+      - switch.turn_on: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
   on_pd_negotiation_failure:
     then:
       - output.turn_off: yellow_led
       - output.turn_on: red_led
-      - switch.turn_off: load_siwtch
+      - switch.turn_off: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
