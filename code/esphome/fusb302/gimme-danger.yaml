@@ -1,10 +1,22 @@
 esphome:
   name: gimmedanger
-  friendly_name: gimmedanger
+  friendly_name: Gimme Danger!!
 
 esp32:
   board: esp32-s3-devkitc-1
   flash_size: 4MB
+
+api:
+  encryption:
+    key: !secret homeassistant_enc_key
+
+# ota:
+#   password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  enable_on_boot: false
 
 i2c:
   sda: GPIO8
@@ -13,20 +25,20 @@ i2c:
   id: i2c_bus
 
 # Enable logging
-logger:
-  # By default, ESP32-S3 uses USB-CDC for logging.
-  hardware_uart: UART0
-  level: VERBOSE
-  logs:
-    ledc.output: WARN
-    light: WARN
-    api: WARN
-    api.connection: WARN
-    logger: WARN
-    ota: WARN
-    wifi: WARN
-    i2c.arduino: WARN
-    app: WARN
+# logger:
+#   # By default, ESP32-S3 uses USB-CDC for logging.
+#   hardware_uart: UART0
+#   level: VERBOSE
+#   logs:
+#     ledc.output: WARN
+#     light: WARN
+#     api: WARN
+#     api.connection: WARN
+#     logger: WARN
+#     ota: WARN
+#     wifi: WARN
+#     i2c.arduino: WARN
+#     app: WARN
 
 # logger:
 #   # By default, ESP32-S3 uses USB-CDC for logging.
@@ -44,6 +56,18 @@ output:
       number: 14
       mode: output
     id: red_led
+  - platform: ledc
+    id: output_ch1
+    pin: GPIO48
+  - platform: ledc
+    id: output_ch2
+    pin: GPIO47
+  - platform: ledc
+    id: output_ch3
+    pin: GPIO21
+  - platform: ledc
+    id: output_ch4
+    pin: GPIO38
 
 switch:
   - platform: gpio
@@ -61,8 +85,8 @@ sensor:
 
 fusb302:
   interrupt_pin: GPIO10
-  voltage: 7000 mV
-  current: 1000 mA
+  voltage: 11000 mV
+  current: 500 mA
   on_pd_negotiation_success:
     then:
       - output.turn_on: yellow_led
@@ -70,6 +94,7 @@ fusb302:
       - switch.turn_on: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+      - wifi.enable
   on_pd_negotiation_failure:
     then:
       - output.turn_off: yellow_led
@@ -77,3 +102,30 @@ fusb302:
       - switch.turn_off: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
+      - wifi.enable
+
+light:
+  - platform: monochromatic
+    name: Light Channel 1
+    id: light_ch1
+    output: output_ch1
+    effects:
+      flicker:
+  - platform: monochromatic
+    name: Light Channel 2
+    id: light_ch2
+    output: output_ch2
+    effects:
+      flicker:
+  - platform: monochromatic
+    name: Light Channel 3
+    id: light_ch3
+    output: output_ch3
+    effects:
+      flicker:
+  - platform: monochromatic
+    name: Light Channel 4
+    id: light_ch4
+    output: output_ch4
+    effects:
+      flicker:
