@@ -1,0 +1,303 @@
+(kicad_symbol_lib (version 20210201) (generator TousstNicolas/JLC2KiCad_lib)
+  (symbol "AO4805" (pin_names hide)  (in_bom yes) (on_board yes)
+    (property "Reference" "U" (id 0) (at 0 1.27 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "AO4805" (id 1) (at 0 -2.54 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "footprint:SOIC-8_L4.9-W3.9-P1.27-LS6.0-BL" (id 2) (at 0 -10.16 0)
+      (effects (font (size 1.27 1.27) italic) hide)
+    )
+    (property "Datasheet" "https://so.szlcsc.com/global.html?c=&k=C9843" (id 3) (at -2.286 0.127 0)
+      (effects (font (size 1.27 1.27)) (justify left) hide)
+    )
+    (property "ki_keywords" "C38943" (id 4) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C38943" (id 5) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    
+    (symbol "AO4805_1_1"
+      (polyline
+        (pts
+          (xy 2.54000508001016 -0.0)
+          (xy 1.0160020320040641 0.5080010160020321)
+          (xy 1.0160020320040641 -0.5080010160020321)
+          (xy 2.54000508001016 -0.0)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type background))
+      )
+      (polyline
+        (pts
+          (xy 5.08001016002032 -0.5080010160020321)
+          (xy 5.842011684023368 0.762001524003048)
+          (xy 4.3180086360172725 0.762001524003048)
+          (xy 5.08001016002032 -0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type background))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 -2.54000508001016)
+          (xy 5.08001016002032 -2.54000508001016)
+          (xy 5.08001016002032 -0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 1.7780035560071121)
+          (xy 2.54000508001016 2.54000508001016)
+          (xy 5.08001016002032 2.54000508001016)
+          (xy 5.08001016002032 0.762001524003048)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 1.7780035560071121)
+          (xy 0.0 1.7780035560071121)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 -0.0)
+          (xy 2.54000508001016 -0.0)
+          (xy 2.54000508001016 -2.54000508001016)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 -1.7780035560071121)
+          (xy 0.0 -1.7780035560071121)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy -0.5080010160020321 2.286004572009144)
+          (xy -0.5080010160020321 -2.286004572009144)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 1.27000254000508)
+          (xy 0.0 2.286004572009144)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 -0.5080010160020321)
+          (xy 0.0 0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 -2.286004572009144)
+          (xy 0.0 -1.27000254000508)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy -2.54000508001016 -0.0)
+          (xy -0.5080010160020321 -0.0)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 5.842011684023368 -0.5080010160020321)
+          (xy 5.588011176022352 -0.5080010160020321)
+          (xy 4.572009144018288 -0.5080010160020321)
+          (xy 4.3180086360172725 -0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (pin unspecified line
+        (at 2.54000508001016 5.08001016002032 270)
+        (length 2.54000508001016)
+        (name "D1" (effects (font (size 1 1))))
+        (number "5" (effects (font (size 1 1))))
+      )
+      (pin unspecified line
+        (at -5.08001016002032 -0.0 0)
+        (length 2.54000508001016)
+        (name "G1" (effects (font (size 1 1))))
+        (number "4" (effects (font (size 1 1))))
+      )
+      (pin unspecified line
+        (at 2.54000508001016 -5.08001016002032 90)
+        (length 2.54000508001016)
+        (name "S1" (effects (font (size 1 1))))
+        (number "3" (effects (font (size 1 1))))
+      )
+      (pin unspecified line
+        (at 5.08001016002032 5.08001016002032 270)
+        (length 2.54000508001016)
+        (name "D1" (effects (font (size 1 1))))
+        (number "6" (effects (font (size 1 1))))
+      )
+    )
+    (symbol "AO4805_2_1"
+      (polyline
+        (pts
+          (xy 2.54000508001016 -0.0)
+          (xy 1.0160020320040641 0.5080010160020321)
+          (xy 1.0160020320040641 -0.5080010160020321)
+          (xy 2.54000508001016 -0.0)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type background))
+      )
+      (polyline
+        (pts
+          (xy 5.08001016002032 -0.5080010160020321)
+          (xy 5.842011684023368 0.762001524003048)
+          (xy 4.3180086360172725 0.762001524003048)
+          (xy 5.08001016002032 -0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type background))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 -2.54000508001016)
+          (xy 5.08001016002032 -2.54000508001016)
+          (xy 5.08001016002032 -0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 1.7780035560071121)
+          (xy 2.54000508001016 2.54000508001016)
+          (xy 5.08001016002032 2.54000508001016)
+          (xy 5.08001016002032 0.762001524003048)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 1.7780035560071121)
+          (xy 0.0 1.7780035560071121)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 -0.0)
+          (xy 2.54000508001016 -0.0)
+          (xy 2.54000508001016 -2.54000508001016)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 2.54000508001016 -1.7780035560071121)
+          (xy 0.0 -1.7780035560071121)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy -0.5080010160020321 2.286004572009144)
+          (xy -0.5080010160020321 -2.286004572009144)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 1.27000254000508)
+          (xy 0.0 2.286004572009144)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 -0.5080010160020321)
+          (xy 0.0 0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 0.0 -2.286004572009144)
+          (xy 0.0 -1.27000254000508)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy -2.54000508001016 -0.0)
+          (xy -0.5080010160020321 -0.0)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (polyline
+        (pts
+          (xy 5.842011684023368 -0.5080010160020321)
+          (xy 5.588011176022352 -0.5080010160020321)
+          (xy 4.572009144018288 -0.5080010160020321)
+          (xy 4.3180086360172725 -0.5080010160020321)
+        )
+        (stroke (width 0) (type default) (color 0 0 0 0))
+        (fill (type none))
+      )
+      (pin unspecified line
+        (at 2.54000508001016 5.08001016002032 270)
+        (length 2.54000508001016)
+        (name "D2" (effects (font (size 1 1))))
+        (number "7" (effects (font (size 1 1))))
+      )
+      (pin unspecified line
+        (at -5.08001016002032 -0.0 0)
+        (length 2.54000508001016)
+        (name "G2" (effects (font (size 1 1))))
+        (number "2" (effects (font (size 1 1))))
+      )
+      (pin unspecified line
+        (at 2.54000508001016 -5.08001016002032 90)
+        (length 2.54000508001016)
+        (name "S2" (effects (font (size 1 1))))
+        (number "1" (effects (font (size 1 1))))
+      )
+      (pin unspecified line
+        (at 5.08001016002032 5.08001016002032 270)
+        (length 2.54000508001016)
+        (name "D2" (effects (font (size 1 1))))
+        (number "8" (effects (font (size 1 1))))
+      )
+    )
+  )
+)

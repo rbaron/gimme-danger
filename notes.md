@@ -36,11 +36,31 @@ Power dissipation:
   - SOP-8 package, with the leads it's as big as the AO6407A above...
   - Good choice
 
+## Bidirectional switch
+- [Digikey search](https://www.digikey.ch/en/products/filter/fet-mosfet-arrays/289?s=N4IgjCBcoGwAwHYqgMZQGYEMA2BnApgDQgD2UA2uACwDMAHHDSMWAKwCcATFUi3VRzrMQnNjTithnegnpTa7VjCmsEMKp2Ex2MTuxABdYgAcALlBABlUwCcAlgDsA5iAC%2BxeEOgg0kLHiJSChEeBDhlYmk4OjA4KXEGIUiaMBoEfWSwdgl4zjoYXhEaKjgwKniqKiypGF06JJFa8XLI2s4YCEjWcJhJLs44KgiRVj0ClRK2CYQq6ZKpBjCG9vq6TVbVuMiwqqZtwc51kQQwWS2RdjTRqUuEbgX6DWFm7L6QNVrEZ8HLjJBmujsP5jVisFogfJ0BCFGApdJvMoDbLCMAdMCnFF0Gjdc5gLGjXFYqiXFS1dGGEzmSBWWyOFzuEAAWk03l8tgAroEyJBKJIDK4GSzKAATdk4AAExnFKAAFpgHA58NgKSBlN47MKLIzYkczBZhKYAJ7GfAWYW4NACoA)
+- [DMP3098LSD-13](https://jlcpcb.com/partdetail/DiodesIncorporated-DMP3098LSD13/C531177)
+  - The one Phil uses
+  - Dual P-channel MOSFET
+  - Vgsmax = 20 V
+  - Vds = -30 V
+  - But Id is low: 3.3 A
+- [AO4805](https://jlcpcb.com/parts/componentSearch?searchTxt=AO4805)
+  - Good choice
+  - 25 mOhm (kinda good for 2 MOSFETs)
+- [DMP3028LSD-13](https://jlcpcb.com/partdetail/DiodesIncorporated-DMP3028LSD13/C397949)
+  - Also good choice
+  - Not as many available on JLCPCB
+
 Use a BJT to drive the MOSFET gate?
 - Inverts the signal (NOT gate)
 - [DDTC1](https://datasheet.lcsc.com/lcsc/2304140030_Diodes-Incorporated-DDTC114EUA-7-F_C177021.pdf)
   - Self-biased (includes base and base-emitter resistors)
   - If we drive with 3.3V,
+-
+
+## Design
+- [TI's bidirectional design with P-channel MOSFETs](https://www.ti.com/lit/an/slva948/slva948.pdf)
+- [nxp load switch basics](https://www.nxp.com/docs/en/white-paper/NXP_Load_Switch_Basics.pdf)
 
 
 ## PWM drivers
