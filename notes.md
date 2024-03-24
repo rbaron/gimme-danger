@@ -101,3 +101,14 @@ No need for high Vgsmax (we only switch between 0 and 3.3V).
 - [AON7410](https://datasheet.lcsc.com/lcsc/1808280434_Alpha---Omega-Semicon-AON7410_C269266.pdf)
   - 2W power dissipation
   -
+
+
+## Barrel Jack
+- [54-00131](https://tensility.s3.amazonaws.com/uploads/pdffiles/54-00131.pdf?X-Amz-Expires=600&X-Amz-Date=20240324T080826Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIS2S4WRDQDSWDRZQ%2F20240324%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=e569c52c3d49cae4a8b0648903bb654a75446dcc107ccc80f8f8c48d9fe443ab)
+  - 5.5mm OD, 2.1mm ID
+  - 6A, 48V
+  - Perfect
+  - Not available on JLCPCB, but similar [DC-84](https://jlcpcb.com/partdetail/Jinjia-DC84/C718040) is
+    - Rated for 2A, 30V only
+
+##
