@@ -36,6 +36,34 @@ Power dissipation:
   - SOP-8 package, with the leads it's as big as the AO6407A above...
   - Good choice
 
+### What if we go wild and aim for 3.1 EPR spec with max 48V?
+#### Load Switch (P-channel)
+- [Digikey search](https://www.digikey.ch/en/products/filter/transistors/fets-mosfets/single-fets-mosfets/278?s=N4IgjCBcoGwAwyqAxlAZgQwDYGcCmANCAPZQDaIAzABwCsYclIAukQA4AuUIAyhwE4BLAHYBzEAF8i8akhCpImXIRLkQAJgAsAdm06QRdZTjUw6gxspgami0bABOOA7uV7Lw5Uo6mnzXDBbQxgYdWpZYJhjIJBNNwdqREN6OG0IZLB6bQsYak1c82lKULi7WnUHbQ8NWmL1bOTiqzL-dXSazU11JI6uhpAokpiw1LAekbTqie87GAcwwo05mGtZhxXxtLd%2B%2BusKuzTtSlo7B0ojk8Mz7XLT8607agrjx%2BOx17pLjTyuqbpGcZ5Jy%2BKhwTQOd5EaJnKbrWi0WHaODw05VdRwU55MDtbRaI4WXG0RgE9REiIgG7wIwE2hUnpVai6AkOCExbS5ZHVRJ5DFEblMvkFHpPZEg%2BaBMVtAUgcLwL7rELymBInoMUleCxq2j4ogJKma1Iqg35RyazLzEHYrxnM3HFm2o6LK1PfrYhydcnYm5wXngLrOX1xTohFjsLiQXgCETiKQaBCyaDydDYfBEUiQChEgAEADULOVc-naIWiAiSwM4OWYMW89JqOWkQ2axZqJXazLm7q2wbu6wQJxuABVYSCDgAeTQAFk8BgcABXfh4SREAC05kTCgEc5U6czLAkscQicEABNuCu1RYBxGLBwAJ5sJcRk84VAHoA)
+- [DMP6023LE-13](https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/1808280023_Diodes-Incorporated-DMP6023LE-13_C154901.pdf)
+  - 28 mOhm
+  - 1.3 W power dissipation
+  - 1k+ available at JLCPCB
+  - Good choice
+- [AO4421](https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/1809192244_Alpha---Omega-Semicon-AO4421_C33484.pdf)
+  - 50 mOhm
+  - 2 W power dissipation
+  -
+#### Channel Switch (N-channel)
+- [AON2260](https://aosmd.com/sites/default/files/res/datasheets/AON2260.pdf)
+  - 53 mOhm
+  - 60V
+  - Vth 2V
+  - Rds at 3.3V too high
+- [SSM3K341R](https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2201211430_TOSHIBA-SSM3K341R-LF_C2932178.pdf)
+  - Rds at 3.3V too high
+- [STS5NF60L](https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2001151031_STMicroelectronics-STS5NF60L_C457490.pdf)
+  - Good, but expensive ($1)
+  - Good Rdson at 3.3V, 5A
+- [HL6003](https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251707_HL-6003_C7499845.pdf)
+  - Works but max current 3A
+  - But never heard of this brand
+- Looks like we need an external BJT driver...
+
 ## Bidirectional switch
 - [Digikey search](https://www.digikey.ch/en/products/filter/fet-mosfet-arrays/289?s=N4IgjCBcoGwAwHYqgMZQGYEMA2BnApgDQgD2UA2uACwDMAHHDSMWAKwCcATFUi3VRzrMQnNjTithnegnpTa7VjCmsEMKp2Ex2MTuxABdYgAcALlBABlUwCcAlgDsA5iAC%2BxeEOgg0kLHiJSChEeBDhlYmk4OjA4KXEGIUiaMBoEfWSwdgl4zjoYXhEaKjgwKniqKiypGF06JJFa8XLI2s4YCEjWcJhJLs44KgiRVj0ClRK2CYQq6ZKpBjCG9vq6TVbVuMiwqqZtwc51kQQwWS2RdjTRqUuEbgX6DWFm7L6QNVrEZ8HLjJBmujsP5jVisFogfJ0BCFGApdJvMoDbLCMAdMCnFF0Gjdc5gLGjXFYqiXFS1dGGEzmSBWWyOFzuEAAWk03l8tgAroEyJBKJIDK4GSzKAATdk4AAExnFKAAFpgHA58NgKSBlN47MKLIzYkczBZhKYAJ7GfAWYW4NACoA)
 - [DMP3098LSD-13](https://jlcpcb.com/partdetail/DiodesIncorporated-DMP3098LSD13/C531177)
