@@ -2331,7 +2331,6 @@
     )
   )
 
-
   (junction (at 25.4 57.15) (diameter 0) (color 0 0 0 0)
     (uuid 01d5c94e-6f56-4628-bc4b-54e957404dda)
   )
@@ -4008,7 +4007,7 @@
   )
 
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 117.475 239.395 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp yes) (fields_autoplaced)
     (uuid 2d424fa1-edd3-44bc-8518-50afce85c839)
     (property "Reference" "H2" (at 120.65 237.49 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -4191,7 +4190,7 @@
   )
 
   (symbol (lib_id "DC-84:DC-84") (at 33.02 259.715 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp yes) (fields_autoplaced)
     (uuid 390403b8-34ad-40e4-851b-e1efa0e644d7)
     (property "Reference" "U4" (at 26.289 105.41 0)
       (effects (font (size 1.27 1.27)))
@@ -4777,10 +4776,10 @@
     (property "LCSC" "C165948" (at 41.91 182.245 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53424))
-    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53424))
-    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53424))
-    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53424))
+    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53427))
+    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53427))
+    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53427))
+    (pin "0" (uuid 66456bf3-0975-4b21-ab89-7907a6b53427))
     (pin "A1" (uuid cfcd03e4-9b3a-4628-b35f-a99f0a34d09d))
     (pin "A12" (uuid 56bad57b-f483-4a7f-ae6f-b6453699e1bb))
     (pin "A4" (uuid f77baa50-8f8c-4e07-9023-df88b0128a8f))
@@ -4965,7 +4964,7 @@
   )
 
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 117.475 227.33 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp yes) (fields_autoplaced)
     (uuid 6b6f53b8-a87b-4d7b-b1c7-5496271aeb4c)
     (property "Reference" "H1" (at 120.65 225.425 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -6768,7 +6767,7 @@
   )
 
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 117.475 251.46 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp yes) (fields_autoplaced)
     (uuid fd8e120d-ea15-42bb-a820-4e87b4aa63a1)
     (property "Reference" "H3" (at 120.65 249.555 0)
       (effects (font (size 1.27 1.27)) (justify left))
