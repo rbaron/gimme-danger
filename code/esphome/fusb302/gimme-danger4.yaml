@@ -1,6 +1,6 @@
 esphome:
-  name: gimmedanger1
-  friendly_name: Gimme Danger!! 1
+  name: gimmedanger4
+  friendly_name: Gimme Danger!! 4
 
 esp32:
   board: esp32-s3-devkitc-1
@@ -9,81 +9,83 @@ esp32:
   #   type: esp-idf
   # #   version: recommended
 
-# api:
-#   encryption:
-#     key: !secret homeassistant_enc_key
+api:
+  encryption:
+    key: !secret homeassistant_enc_key
 
-# ota:
-#   password: !secret ota_password
+ota:
+  password: !secret ota_password
 
-# wifi:
-#   ssid: !secret wifi_ssid
-#   password: !secret wifi_pass
-#   enable_on_boot: true
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  enable_on_boot: true
 
 i2c:
   sda: GPIO8
   scl: GPIO9
-  scan: True
+  scan: False
   id: i2c_bus
-  # frequency: 100kHz
+  frequency: 100kHz
   # frequency: 200kHz
   # frequency: 10kHz
   # frequency: 1000kHz
 
 # Enable logging
 logger:
+  # level: VERBOSE
   # By default, ESP32-S3 uses USB-CDC for logging.
   hardware_uart: UART0
+  # level: WARN
   level: WARN
-  logs:
-    ledc.output: WARN
-    light: WARN
-    api: WARN
-    api.connection: WARN
-    logger: WARN
-    ota: WARN
-    wifi: WARN
-    i2c.arduino: WARN
-    app: WARN
-    sensor: WARN
-    ina219: WARN
-    esp2.preferences: WARN
-    # sensor: WARN
+  # logs:
+  #   ledc.output: WARN
+  #   light: WARN
+  #   api: WARN
+  #   api.connection: WARN
+  #   logger: WARN
+  #   ota: WARN
+  #   wifi: WARN
+  #   i2c.arduino: WARN
+  #   app: WARN
+  #   sensor: WARN
+  #   ina219: WARN
+  #   esp2.preferences: WARN
+  # # sensor: WARN
 
 # logger:
 #   # By default, ESP32-S3 uses USB-CDC for logging.
 #   hardware_uart: UART0
 #   level: ERROR
 
-# output:
-#   - platform: gpio
-#     pin:
-#       number: 13
-#       mode: output
-#     id: yellow_led
-#   - platform: gpio
-#     pin:
-#       number: 14
-#       mode: output
-#     id: red_led
-#   - platform: ledc
-#     id: output_ch1
-#     pin: GPIO48
-#   - platform: ledc
-#     id: output_ch2
-#     pin: GPIO47
-#   - platform: ledc
-#     id: output_ch3
-#     pin: GPIO21
-#   - platform: ledc
-#     id: output_ch4
-#     pin: GPIO38
+output:
+  - platform: gpio
+    pin:
+      number: 13
+      mode: output
+    id: yellow_led
+  - platform: gpio
+    pin:
+      number: 14
+      mode: output
+    id: red_led
+  - platform: ledc
+    id: output_ch1
+    pin: GPIO48
+  - platform: ledc
+    id: output_ch2
+    pin: GPIO47
+  - platform: ledc
+    id: output_ch3
+    pin: GPIO21
+  - platform: ledc
+    id: output_ch4
+    pin: GPIO38
 
-# switch:
-#   - platform: gpio
-#     pin: GPIO12
-#     id: load_switch
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: load_switch
 
 sensor:
   # - platform: adc
@@ -109,40 +111,42 @@ sensor:
   #   update_interval: 500ms
 
 fusb302:
-  # interrupt_pin: GPIO10
+  interrupt_pin: GPIO10
   voltage: 11000 mV
   current: 1000 mA
   on_pd_negotiation_success:
     then:
-      # - output.turn_on: yellow_led
-      # - output.turn_off: red_led
-      # - switch.turn_on: load_switch
+      - output.turn_on: yellow_led
+      - output.turn_off: red_led
+      - switch.turn_on: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
       # - wifi.enable
   on_pd_negotiation_failure:
     then:
-      # - output.turn_off: yellow_led
-      # - output.turn_on: red_led
-      # - switch.turn_off: load_switch
+      - output.turn_off: yellow_led
+      - output.turn_on: red_led
+      - switch.turn_off: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
       # - wifi.enable
 
-# light:
-#   - platform: rgbw
-#     restore_mode: RESTORE_DEFAULT_OFF
-#     name: LED Strip
-#     red: output_ch1
-#     green: output_ch2
-#     blue: output_ch3
-#     white: output_ch4
-# - platform: monochromatic
-#   name: Light Channel 1
-#   id: light_ch1
-#   output: output_ch1
-#   effects:
-#     flicker:
+light:
+  - platform: rgbw
+    # restore_mode: RESTORE_DEFAULT_OFF
+    name: LED Strip
+    red: output_ch1
+    green: output_ch2
+    blue: output_ch3
+    white: output_ch4
+
+  - platform: monochromatic
+    name: Light Channel 1
+    id: light_ch1
+    output: output_ch1
+
+  # effects:
+  #   flicker:
 # - platform: monochromatic
 #   name: Light Channel 2
 #   id: light_ch2
