@@ -1,0 +1,92 @@
+esphome:
+  name: "test"
+  friendly_name: test
+  platformio_options:
+    board_build.flash_mode: dio
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+api:
+  encryption:
+    key: !secret homeassistant_enc_key
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  # enable_on_boot: false
+
+# Enable logging
+# logger:
+#   hardware_uart: UART0
+#   level: ERROR
+
+i2c:
+  sda: GPIO8
+  scl: GPIO9
+  # scan: False
+  id: i2c_bus
+
+output:
+  - platform: gpio
+    pin:
+      number: 13
+      mode: output
+    id: yellow_led
+  - platform: gpio
+    pin:
+      number: 14
+      mode: output
+    id: red_led
+  - platform: gpio
+    id: output_ch1
+    pin: GPIO48
+
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: load_switch
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      inverted: True
+      mode:
+        input: true
+        pullup: true
+    name: Boot Button
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    on_press:
+      then:
+        - logger.log: "Boot button pressed!"
+        - output.turn_on: output_ch1
+
+fusb302:
+  # interrupt_pin: GPIO10
+  voltage: 11000 mV
+  # voltage: 12000 mV
+  current: 1000 mA
+  on_pd_negotiation_success:
+    then:
+      - output.turn_on: yellow_led
+      - output.turn_off: red_led
+      - switch.turn_on: load_switch
+      - lambda: |-
+          ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+      # - wifi.enable
+  on_pd_negotiation_failure:
+    then:
+      - output.turn_off: yellow_led
+      - output.turn_on: red_led
+      - switch.turn_off: load_switch
+      - lambda: |-
+          ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
+      # - wifi.enable

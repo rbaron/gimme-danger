@@ -13,24 +13,21 @@ esp32:
 #   encryption:
 #     key: !secret homeassistant_enc_key
 
-# ota:
-#   password: !secret ota_password
+ota:
+  password: !secret ota_password
 
-# wifi:
-#   ssid: !secret wifi_ssid
-#   password: !secret wifi_pass
-#   enable_on_boot: true
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  enable_on_boot: true
 
 i2c:
-  # sda: GPIO8
-  # scl: GPIO9
-  # sda: GPIO21
-  sda: GPIO3
-  scl: GPIO18
+  sda: GPIO8
+  scl: GPIO9
   scan: False
   id: i2c_bus
-  # frequency: 100kHz
-  # frequency: 100kHz
+  frequency: 100kHz
+  # frequency: 500kHz
   # frequency: 200kHz
   # frequency: 10kHz
   # frequency: 1000kHz

@@ -5,9 +5,9 @@ esphome:
 esp32:
   board: esp32-s3-devkitc-1
   flash_size: 4MB
-  # framework:
-  #   type: esp-idf
-  # #   version: recommended
+  framework:
+    type: esp-idf
+    # version: recommended
 
 api:
   encryption:
@@ -21,15 +21,16 @@ wifi:
   password: !secret wifi_pass
   enable_on_boot: true
 
-i2c:
-  sda: GPIO8
-  scl: GPIO9
-  scan: False
-  id: i2c_bus
-  frequency: 100kHz
-  # frequency: 200kHz
-  # frequency: 10kHz
-  # frequency: 1000kHz
+# i2c:
+#   sda: GPIO8
+#   scl: GPIO9
+#   scan: False
+#   id: i2c_bus
+#   # frequency: 100kHz
+#   # frequency: 100kHz
+#   # frequency: 200kHz
+#   # frequency: 10kHz
+#   # frequency: 1000kHz
 
 # Enable logging
 logger:
@@ -69,18 +70,21 @@ output:
       number: 14
       mode: output
     id: red_led
-  - platform: ledc
+  #   - platform: ledc
+  #     id: output_ch1
+  #     pin: GPIO48
+  #   - platform: ledc
+  #     id: output_ch2
+  #     pin: GPIO47
+  #   - platform: ledc
+  #     id: output_ch3
+  #     pin: GPIO21
+  #   - platform: ledc
+  #     id: output_ch4
+  #     pin: GPIO38
+  - platform: gpio
     id: output_ch1
     pin: GPIO48
-  - platform: ledc
-    id: output_ch2
-    pin: GPIO47
-  - platform: ledc
-    id: output_ch3
-    pin: GPIO21
-  - platform: ledc
-    id: output_ch4
-    pin: GPIO38
 
 switch:
   - platform: gpio
@@ -110,40 +114,40 @@ sensor:
   #   max_current: 5A
   #   update_interval: 500ms
 
-fusb302:
-  interrupt_pin: GPIO10
-  voltage: 11000 mV
-  current: 1000 mA
-  on_pd_negotiation_success:
-    then:
-      - output.turn_on: yellow_led
-      - output.turn_off: red_led
-      - switch.turn_on: load_switch
-      - lambda: |-
-          ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
-      # - wifi.enable
-  on_pd_negotiation_failure:
-    then:
-      - output.turn_off: yellow_led
-      - output.turn_on: red_led
-      - switch.turn_off: load_switch
-      - lambda: |-
-          ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
-      # - wifi.enable
+# fusb302:
+#   # interrupt_pin: GPIO10
+#   voltage: 11000 mV
+#   current: 1000 mA
+#   on_pd_negotiation_success:
+#     then:
+#       - output.turn_on: yellow_led
+#       - output.turn_off: red_led
+#       - switch.turn_on: load_switch
+#       - lambda: |-
+#           ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+#       # - wifi.enable
+#   on_pd_negotiation_failure:
+#     then:
+#       - output.turn_off: yellow_led
+#       - output.turn_on: red_led
+#       - switch.turn_off: load_switch
+#       - lambda: |-
+#           ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
+#       # - wifi.enable
 
 light:
-  - platform: rgbw
-    # restore_mode: RESTORE_DEFAULT_OFF
-    name: LED Strip
-    red: output_ch1
-    green: output_ch2
-    blue: output_ch3
-    white: output_ch4
+  # - platform: rgbw
+  #   # restore_mode: RESTORE_DEFAULT_OFF
+  #   name: LED Strip
+  #   red: output_ch1
+  #   green: output_ch2
+  #   blue: output_ch3
+  #   white: output_ch4
 
-  - platform: monochromatic
-    name: Light Channel 1
-    id: light_ch1
-    output: output_ch1
+  # - platform: monochromatic
+  #   name: Light Channel 1
+  #   id: light_ch1
+  #   output: output_ch1
 
   # effects:
   #   flicker:
@@ -165,3 +169,20 @@ light:
 #   output: output_ch4
 #   effects:
 #     flicker:
+
+# binary_sensor:
+#   - platform: gpio
+#     pin:
+#       number: GPIO0
+#       inverted: True
+#       mode:
+#         input: true
+#         pullup: true
+#     name: Boot Button
+#     filters:
+#       - delayed_on: 10ms
+#       - delayed_off: 10ms
+#     on_press:
+#       then:
+#         - logger.log: "Boot button pressed!"
+#         - output.turn_on: output_ch1

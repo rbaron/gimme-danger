@@ -1,8 +1,339 @@
+# 2024-04-15
+
+I am using a FUSB302 and most projects use FUSB302B ??  WHY???
+
+# gimme danger 3
+- Added 100n + 10uF to the ESP32
+- Added 100n to FUSB302
+- Added 5.1k pull-up to SDA and SDL (in parallel with existing 4.7k)
+
+Trying without interrupt, just polling to force errors. Still errors...
+The i2c lines look clean on the oscilloscope. What the hell?
+- Power spikes due to wifi?
+
+With esp-idf, no WiFi: 6 errors in 6 minutes
+With esp-idf, WiFi+API+OTA, NO logger: failed after 1h or so
+
+I am missing a 10uF+ cap on VCONN!!
+
+# 2024-04-14
+## gimme danger 1
+Will try more destructive methods.
+### Hypohtesis 1
+i2c cross talk. I will attempt to sever the i2c lines and directly connect FUSB302 to the ESP32 (different, unused pins). 10k pull-up may be already enough hopefully?
+
+First, I disable interrupt and just do fast polling to force more errors.
+- [pre-botch](./debug-files/logs/crosstalk/gimmedanger1-pre-botch.txt)
+  - Few errors per second.
+
+# Gimme danger 0.0.1a
+Let's try it on the 0.0.0a version. It has pretty short, spaced out i2c line.
+500kHz, with no wifi: No errors!!!!!!!!
+500kHz, with wifi and ota and api: ~6 errors in 3 minutes
+100kHz, with wifi and ota and api: ~50 in 5 minutes
+1000kHz, with wifi and ota and api: ~32 in 4 minutes
+100kHz, with wifi and ota but NO api: ~13 in 4 minutes
+
+# Gimme danger 4
+100kHz, no wifi: Very few errors. 3 errors in 3 minutes.
+500kHz, no wifi: ~1err/min
+
+
 # 2024-04-13
 Let's try to establish a baseline. Flashing gimme danger 1:
 - No WiFi
 - No  PWM
 - 11V PPS
+- 470 uF cap
+- Logger ON WARN
+
+Some bad ringing on the SDA line (NewFile2.png) at 500Hz. Cross talk with SCL?
+Started: 10h10
+
+Not a good sign...
+```
+[10:19:56][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[10:19:56][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[10:19:56][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[10:19:56][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[10:19:56][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -112).
+[10:19:56][E][fusb302.component:800]: Soft reset sent.
+[10:19:56][W][fusb302.component:418]: Accept message received
+[10:19:56][W][fusb302.component:418]: Accept message received
+[10:19:56][W][fusb302.component:421]: PS_RDY message received
+```
+
+Failed at 10h38:
+```
+[10:38:36][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[10:38:43][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[10:38:43][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[10:38:43][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[10:38:43][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[10:38:43][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[10:38:43][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[10:38:44]ESP-ROM:esp32s3-20210327
+[10:38:44]Build:Mar 27 2021
+[10:38:44]rst:0x1 (POWERON),boot:0xa (SPI_FAST_FLASH_BOOT)
+[10:38:44]SPIWP:0xee
+[10:38:44]mode:DIO, clock div:1
+[10:38:44]load:0x3fce3808,len:0x43c
+[10:38:44]load:0x403c9700,len:0xbec
+[10:38:44]load:0x403cc700,len:0x2a3c
+[10:38:44]entry 0x403c98d8
+```
+
+Redoing it while capturing.
+Started: 10h43
+Reboot: 15h49
+
+```
+[15:49:06][W][fusb302_trigger:127]: PD negotiation success outcome: 1
+[15:49:06][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[15:49:13][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[15:49:13][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[15:49:13][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[15:49:13][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[15:49:13][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[15:49:13][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -2648).
+[15:49:13][E][fusb302.component:800]: Soft reset sent.
+[15:49:13][W][fusb302.component:418]: Accept message received
+[15:49:14]ESP-ROM:esp32s3-20210327
+[15:49:14]Build:Mar 27 2021
+[15:49:14]rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+[15:49:14]SPIWP:0xee
+[15:49:14]mode:DIO, clock div:1
+[15:49:14]load:0x3fce3808,len:0x43c
+[15:49:14]load:0x403c9700,len:0xbec
+[15:49:14]load:0x403cc700,len:0x2a3c
+[15:49:14]entry 0x403c98d8
+[15:49:15][W][fusb302.component:418]: Accept message received
+[15:49:15][W][fusb302.component:421]: PS_RDY message received
+[15:49:15][W][fusb302_trigger:127]: PD negotiation success outcome: 1
+[15:49:15][W][fusb302.component:796]: Watchdog expected READY state (and we're at 5) -- sending a soft reset (test: 0).
+[15:49:15][E][fusb302.component:800]: Soft reset sent.
+[15:49:15][W][fusb302.component:418]: Accept message received
+[15:49:15][W][fusb302.component:418]: Accept message received
+[15:49:15][W][fusb302.component:421]: PS_RDY message received
+```
+
+After reboot it kept going. Until 21h40, two more reboots. But I noticed we managed to respond to 6 Soft_Resets!
+```
+[21:33:30][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[21:33:37][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[21:33:37][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[21:33:37][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[21:33:37][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[21:33:37][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[21:33:37][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[21:33:37][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[21:33:37][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[21:33:37][W][fusb302.component:418]: Accept message received
+[21:33:37][W][fusb302.component:421]: PS_RDY message received
+[21:33:37][W][fusb302_trigger:127]: PD negotiation success outcome: 1
+[21:33:37][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[21:33:44][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+```
+
+All of the six follow the exact same pattern:
+```
+[12:49:29][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[12:49:29][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[12:49:29][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[12:49:29][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[12:49:29][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+```
+
+They always happen after two failures to write to 0x43 (fifo) with the error 2 (NOT_ACKNOWLEDGED).
+
+The 3 reboots of the day were:
+```
+[15:49:06][W][fusb302_trigger:127]: PD negotiation success outcome: 1
+[15:49:06][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[15:49:13][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[15:49:13][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[15:49:13][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[15:49:13][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[15:49:13][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[15:49:13][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -2648).
+[15:49:13][E][fusb302.component:800]: Soft reset sent.
+[15:49:13][W][fusb302.component:418]: Accept message received
+[15:49:14]ESP-ROM:esp32s3-20210327
+[15:49:14]Build:Mar 27 2021
+[15:49:14]rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+
+[17:49:31][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[17:49:38][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[17:49:38][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[17:49:38][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[17:49:38][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[17:49:38][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[17:49:38][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -1043).
+[17:49:38][E][fusb302.component:800]: Soft reset sent.
+[17:49:38][W][fusb302.component:418]: Accept message received
+[17:49:38][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[17:49:38][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[17:49:38][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[17:49:38][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[17:49:39]ESP-ROM:esp32s3-20210327
+[17:49:39]Build:Mar 27 2021
+[17:49:39]rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+
+
+[21:14:57][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[21:15:04][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[21:15:04][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[21:15:04][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[21:15:04][W][fusb302.component:418]: Accept message received
+[21:15:05][12325475][E][Wire.cpp:513] requestFrom(): i2cRead returned Error 263
+[21:15:05][W][fusb302.component:693]: Failed to read register 0x43 with error 3. Retrying...
+[21:15:05][E][fusb302.component:395]: CRC mismatch! 0x00000000 != 0xD6CFE97B
+[21:15:05][E][fusb302.component:334]: Failed to read FIFO
+[21:15:05][W][component:214]: Component fusb302 took a long time for an operation (1.03 s).
+[21:15:05][W][component:215]: Components should block for at most 20-30ms.
+[21:15:05][W][fusb302.component:781]: Interrupt is asserted. Something is wrong.
+[21:15:05][W][fusb302.component:796]: Watchdog expected READY state (and we're at 4) -- sending a soft reset (test: -1773).
+[21:15:05][E][fusb302.component:800]: Soft reset sent.
+[21:15:05][E][fusb302.component:395]: CRC mismatch! 0x49E3F0BD != 0x44E3F0BD
+[21:15:05][E][fusb302.component:334]: Failed to read FIFO
+[21:15:05][W][fusb302.component:418]: Accept message received
+[21:15:06]ESP-ROM:esp32s3-20210327
+[21:15:06]Build:Mar 27 2021
+[21:15:06]rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+
+```
+
+Overnight it failed a few more times...
+```
+[22:37:01][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[22:37:01][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -717).
+[22:37:01][E][fusb302.component:800]: Soft reset sent.
+[22:37:01][W][fusb302.component:418]: Accept message received
+[22:37:01][E][fusb302.component:395]: CRC mismatch! 0xFFFFFFFF != 0x2ABDB53E
+[22:37:01][E][fusb302.component:334]: Failed to read FIFO
+[22:37:01][E][fusb302.component:395]: CRC mismatch! 0x00000000 != 0xCC8738D0
+[22:37:01][E][fusb302.component:334]: Failed to read FIFO
+[22:37:02]ESP-ROM:esp32s3-20210327
+[22:37:02]Build:Mar 27 2021
+[22:37:02]rst:0x1 (POWERON),boot:0xa (SPI_FAST_FLASH_BOOT)
+
+[23:27:10][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[23:27:10][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[23:27:10][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[23:27:12]ESP-ROM:esp32s3-20210327
+[23:27:12]Build:Mar 27 2021
+[23:27:12]rst:0x1 (POWERON),boot:0xa (SPI_FAST_FLASH_BOOT)
+
+[23:27:10][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[23:27:10][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[23:27:10][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[23:27:10][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[23:27:12]ESP-ROM:esp32s3-20210327
+[23:27:12]Build:Mar 27 2021
+[23:27:12]rst:0x1 (POWERON),boot:0xa (SPI_FAST_FLASH_BOOT)
+
+[00:04:45][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[00:04:45][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[00:04:45][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[00:04:45][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[00:04:45][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[00:04:45][E][fusb302.component:395]: CRC mismatch! 0xC000DC00 != 0x951E9977
+[00:04:45][E][fusb302.component:334]: Failed to read FIFO
+[00:04:45][E][fusb302.component:395]: CRC mismatch! 0x00000000 != 0x9A363B09
+[00:04:45][E][fusb302.component:334]: Failed to read FIFO
+[00:04:46]ESP-ROM:esp32s3-20210327
+[00:04:46]Build:Mar 27 2021
+[00:04:46]rst:0x1 (POWERON),boot:0x2a (SPI_FAST_FLASH_BOOT)
+
+[01:42:52][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[01:42:52][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[01:42:52][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[01:42:52][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[01:42:52][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[01:42:52][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[01:42:52][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[01:42:53]ESP-ROM:esp32s3-20210327
+[01:42:53]Build:Mar 27 2021
+[01:42:53]rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+
+[04:00:42][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[04:00:49][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[04:00:49][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[04:00:49][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[04:00:49][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[04:00:49][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[04:00:49][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -1204).
+[04:00:49][E][fusb302.component:800]: Soft reset sent.
+[04:00:49][W][fusb302.component:418]: Accept message received
+[04:00:49][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[04:00:49][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[04:00:50]ESP-ROM:esp32s3-20210327
+[04:00:50]Build:Mar 27 2021
+[04:00:50]rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+
+[04:07:26][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[04:07:33][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[04:07:33][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[04:07:33][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[04:07:33][E][fusb302.component:395]: CRC mismatch! 0xFF99095A != 0xB499095A
+[04:07:33][E][fusb302.component:334]: Failed to read FIFO
+[04:07:33][E][fusb302.component:395]: CRC mismatch! 0x00000000 != 0xAF0DAED7
+[04:07:33][E][fusb302.component:334]: Failed to read FIFO
+[04:07:33][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -60).
+[04:07:33][E][fusb302.component:800]: Soft reset sent.
+[04:07:33][W][fusb302.component:418]: Accept message received
+[04:07:33][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[04:07:33][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[04:07:34]ESP-ROM:esp32s3-20210327
+[04:07:34]Build:Mar 27 2021
+[04:07:34]rst:0x1 (POWERON),boot:0x2a (SPI_FAST_FLASH_BOOT)
+
+[05:43:42][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[05:43:42][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[05:43:42][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[05:43:42][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[05:43:42][E][fusb302.component:431]: Soft_Reset received, replied with Accept
+[05:43:43]ESP-ROM:esp32s3-20210327
+[05:43:43]Build:Mar 27 2021
+[05:43:43]rst:0x1 (POWERON),boot:0xa (SPI_FAST_FLASH_BOOT)
+
+[06:30:32][W][fusb302.component:789]: Watchdog expired, but we're in READY state. Not doing anything.
+[06:30:39][W][fusb302.component:601]: Maybe rerequesting PPS PDO. State is: 5
+[06:30:39][W][fusb302.component:605]: Ok! Re-requesting PPS PDO.
+[06:30:39][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[06:30:39][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[06:30:39][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[06:30:39][W][fusb302.component:796]: Watchdog expected READY state (and we're at 3) -- sending a soft reset (test: -404).
+[06:30:39][E][fusb302.component:800]: Soft reset sent.
+[06:30:39][W][fusb302.component:418]: Accept message received
+[06:30:39][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[06:30:39][W][fusb302.component:720]: Failed to write register 0x43 with error 2. Retrying...
+[06:30:40]ESP-ROM:esp32s3-20210327
+[06:30:40]Build:Mar 27 2021
+[06:30:40]rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+
+[07:36:06][W][fusb302.component:610]: Done re-requesting PDO. Re-scheduling PPS timer
+[07:36:06][W][fusb302.component:418]: Accept message received
+[07:36:07][3927130][E][Wire.cpp:513] requestFrom(): i2cRead returned Error 263
+[07:36:07][W][fusb302.component:693]: Failed to read register 0x43 with error 3. Retrying...
+[07:36:07][E][fusb302.component:395]: CRC mismatch! 0x0000293B != 0x293B1401
+[07:36:07][E][fusb302.component:334]: Failed to read FIFO
+[07:36:07][W][component:214]: Component fusb302 took a long time for an operation (1.02 s).
+[07:36:07][W][component:215]: Components should block for at most 20-30ms.
+[07:36:07][W][fusb302.component:796]: Watchdog expected READY state (and we're at 4) -- sending a soft reset (test: -573).
+[07:36:07][E][fusb302.component:800]: Soft reset sent.
+[07:36:07][W][fusb302.component:693]: Failed to read register 0x41 with error 2. Retrying...
+[07:36:07][W][fusb302.component:418]: Accept message received
+[07:36:07][E][fusb302.component:395]: CRC mismatch! 0xFFFFFFFF != 0xC046C7B6
+[07:36:07][E][fusb302.component:334]: Failed to read FIFO
+[07:36:07][E][fusb302.component:395]: CRC mismatch! 0x00000000 != 0x9A363B09
+[07:36:07][E][fusb302.component:334]: Failed to read FIFO
+[07:36:09]ESP-ROM:esp32s3-20210327
+[07:36:09]Build:Mar 27 2021
+[07:36:09]rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+
+
+```
 
 
 # 2024-04-12

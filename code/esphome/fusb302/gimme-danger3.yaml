@@ -7,7 +7,7 @@ esp32:
   flash_size: 4MB
   # framework:
   #   type: esp-idf
-  # #   version: recommended
+  #   # version: recommended
 
 api:
   encryption:
@@ -24,34 +24,35 @@ wifi:
 i2c:
   sda: GPIO8
   scl: GPIO9
-  scan: False
+  # scan: False
   id: i2c_bus
-  frequency: 500kHz
-  # frequency: 200kHz
-  # frequency: 10kHz
-  # frequency: 1000kHz
+#   # frequency: 100kHz
+#   # frequency: 100kHz
+#   # frequency: 200kHz
+#   # frequency: 10kHz
+#   # frequency: 1000kHz
 
 # Enable logging
-# logger:
-#   # level: VERBOSE
-#   # By default, ESP32-S3 uses USB-CDC for logging.
-#   hardware_uart: UART0
-#   # level: WARN
-#   level: WARN
-#   # logs:
-#   #   ledc.output: WARN
-#   #   light: WARN
-#   #   api: WARN
-#   #   api.connection: WARN
-#   #   logger: WARN
-#   #   ota: WARN
-#   #   wifi: WARN
-#   #   i2c.arduino: WARN
-#   #   app: WARN
-#   #   sensor: WARN
-#   #   ina219: WARN
-#   #   esp2.preferences: WARN
-#   # # sensor: WARN
+logger:
+  # level: VERBOSE
+  # By default, ESP32-S3 uses USB-CDC for logging.
+  hardware_uart: UART0
+  # level: WARN
+  level: WARN
+  # logs:
+  #   ledc.output: WARN
+  #   light: WARN
+  #   api: WARN
+  #   api.connection: WARN
+  #   logger: WARN
+  #   ota: WARN
+  #   wifi: WARN
+  #   i2c.arduino: WARN
+  #   app: WARN
+  #   sensor: WARN
+  #   ina219: WARN
+  #   esp2.preferences: WARN
+  # # sensor: WARN
 
 # logger:
 #   # By default, ESP32-S3 uses USB-CDC for logging.
@@ -81,6 +82,9 @@ output:
   - platform: ledc
     id: output_ch4
     pin: GPIO38
+  # - platform: gpio
+  #   id: output_ch1
+  #   pin: GPIO48
 
 switch:
   - platform: gpio
@@ -147,21 +151,38 @@ light:
 
   # effects:
   #   flicker:
-  # - platform: monochromatic
-  #   name: Light Channel 2
-  #   id: light_ch2
-  #   output: output_ch2
-  #   effects:
-  #     flicker:
-  # - platform: monochromatic
-  #   name: Light Channel 3
-  #   id: light_ch3
-  #   output: output_ch3
-  #   effects:
-  #     flicker:
-  # - platform: monochromatic
-  #   name: Light Channel 4
-  #   id: light_ch4
-  #   output: output_ch4
-  #   effects:
-  #     flicker:
+# - platform: monochromatic
+#   name: Light Channel 2
+#   id: light_ch2
+#   output: output_ch2
+#   effects:
+#     flicker:
+# - platform: monochromatic
+#   name: Light Channel 3
+#   id: light_ch3
+#   output: output_ch3
+#   effects:
+#     flicker:
+# - platform: monochromatic
+#   name: Light Channel 4
+#   id: light_ch4
+#   output: output_ch4
+#   effects:
+#     flicker:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      inverted: True
+      mode:
+        input: true
+        pullup: true
+    name: Boot Button
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    on_press:
+      then:
+        - logger.log: "Boot button pressed!"
+        - output.turn_on: output_ch1
