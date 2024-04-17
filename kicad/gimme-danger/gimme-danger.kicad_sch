@@ -6,8 +6,8 @@
 	(paper "A3")
 	(title_block
 		(title "gimme-danger")
-		(date "2024-03-23")
-		(rev "0.0.2a")
+		(date "2024-04-17")
+		(rev "0.0.3a")
 		(company "rbaron.net")
 	)
 	(lib_symbols
@@ -8961,7 +8961,7 @@
 		)
 		(uuid "18a16749-1b74-4ec5-8f38-a307ba186bfb")
 	)
-	(text "Improvements over 0.0.2a:\n- If we support EPR up to 48V\n  - DC/DC converter update (right now only up to 28V)\n  - Better zone clearance (0.1mm should be fine for up to 28V)\n  - Optional: N-Channel MOSFETs only rated for 30V\n  - Anyway FUSB302 only rated for 20V (28V abs max)\n- Better clearance for ESP32-S3 antenna\n- Clearance of vias over ESP32 GND middle pad\n- JST for CCx pins -- small JST PH should work fine\n- JST for UART\n- JST for i2c\n - Maybe with jumpers to break off\n- Extra channel? Some cool light strips have RGBWW (warm and cool white)\n- Channel connections:\n  - JST XH? Max 3A -- https://www.digikey.ch/en/products/detail/jst-sales-america-inc/S6B-XH-A/1651034\n- [DONE] I2C lines less reliable than 0.0.1a?\n- Move switching regulator further from signal traces?\n- [DONE] TPS62175DQCR may be better for stepping down voltage to 3.3. Only requires a small 10mH inductor, instead of our beefy 47\n- [DONE] More caps on regulator's output\n- [DONE] Unpopulated 0805 decoupling pads for ESP32 on the back\n- [DONE] Missing 10uF on VCONN!!!!!!!!!!!! on FUSB302\n- [DONE] VConn can draw up to 500 mA??\n  - Not really... We can choose to power devices with it, up to a max of 500 mA\n- [DONE] Update to FUSB302B!!!\n- Move step down further from components\n- Built-in CC line to 3.3V for logic analyzer?\n- [DONE] Wrong 47uH inductor.. Should have been 6.8uH\n- Update silkscreen version"
+	(text "Improvements over 0.0.2a:\n- If we support EPR up to 48V\n  - DC/DC converter update (right now only up to 28V)\n  - Better zone clearance (0.1mm should be fine for up to 28V)\n  - Optional: N-Channel MOSFETs only rated for 30V\n  - Anyway FUSB302 only rated for 20V (28V abs max)\n- Better clearance for ESP32-S3 antenna\n- [DONE] Clearance of vias over ESP32 GND middle pad\n- [NO] JST for CCx pins -- small JST PH should work fine\n- [NO] JST for UART (added headers)\n- [NO] JST for i2c\n - Maybe with jumpers to break off\n- [NO] Extra channel? Some cool light strips have RGBWW (warm and cool white)\n- [NO] Channel connections:\n  - JST XH? Max 3A -- https://www.digikey.ch/en/products/detail/jst-sales-america-inc/S6B-XH-A/1651034\n- [DONE] I2C lines less reliable than 0.0.1a?\n- [DONE] Move switching regulator further from signal traces?\n- [DONE] TPS62175DQCR may be better for stepping down voltage to 3.3. Only requires a small 10mH inductor, instead of our beefy 47\n- [DONE] More caps on regulator's output\n- [DONE] Unpopulated 0805 decoupling pads for ESP32 on the back\n- [DONE] Missing 10uF on VCONN!!!!!!!!!!!! on FUSB302\n- [DONE] VConn can draw up to 500 mA??\n  - Not really... We can choose to power devices with it, up to a max of 500 mA\n- [DONE] Update to FUSB302B!!!\n- [DONE] Move step down further from components\n- [NO] Built-in CC line to 3.3V for logic analyzer?\n- [DONE] Wrong 47uH inductor.. Should have been 6.8uH\n- [DONE] Update silkscreen version"
 		(exclude_from_sim no)
 		(at 350.012 195.834 0)
 		(effects
@@ -10798,7 +10798,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "0492b907-dc3f-46ff-b3dc-a32637de0f56")
 		(property "Reference" "U1"
 			(at 102.87 128.905 0)
@@ -12106,9 +12106,9 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "2fc84ad3-fb11-4917-b1ac-d7e7e3604db5")
 		(property "Reference" "J1"
 			(at 117.475 19.05 0)
@@ -18129,28 +18129,28 @@
 			)
 		)
 		(pin "1"
-			(uuid "8f8258d7-58a6-4d55-96ae-edfb0320d345")
+			(uuid "8f8258d7-58a6-4d55-96ae-edfb0320d346")
 		)
 		(pin "2"
-			(uuid "c119dfed-5d37-4039-919b-48acc98a3619")
+			(uuid "c119dfed-5d37-4039-919b-48acc98a361a")
 		)
 		(pin "6"
-			(uuid "5d1285dd-5751-4931-887f-d8cab56b8a56")
+			(uuid "5d1285dd-5751-4931-887f-d8cab56b8a57")
 		)
 		(pin "5"
-			(uuid "e9aa8c6a-a356-4c7c-893f-83950ff84f37")
+			(uuid "e9aa8c6a-a356-4c7c-893f-83950ff84f38")
 		)
 		(pin "4"
-			(uuid "ca1528a4-a033-4e1e-9664-6fe20049c00a")
+			(uuid "ca1528a4-a033-4e1e-9664-6fe20049c00b")
 		)
 		(pin "3"
-			(uuid "fe62b419-f29c-4c8a-9562-1f1e961b9790")
+			(uuid "fe62b419-f29c-4c8a-9562-1f1e961b9791")
 		)
 		(pin "7"
-			(uuid "fcafe246-5e0a-47ee-afca-7d60326c5f88")
+			(uuid "fcafe246-5e0a-47ee-afca-7d60326c5f89")
 		)
 		(pin "8"
-			(uuid "22e73333-09bb-4957-a2c1-779d8e2d8456")
+			(uuid "22e73333-09bb-4957-a2c1-779d8e2d8457")
 		)
 		(instances
 			(project "gimme-danger"
