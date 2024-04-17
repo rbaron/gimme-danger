@@ -111,4 +111,13 @@ No need for high Vgsmax (we only switch between 0 and 3.3V).
   - Not available on JLCPCB, but similar [DC-84](https://jlcpcb.com/partdetail/Jinjia-DC84/C718040) is
     - Rated for 2A, 30V only
 
-##
+## Regulator
+- [TPS62175](https://www.ti.com/product/TPS62175)
+- [TPS62932](https://www.ti.com/product/TPS62932)
+  - Newer version
+  - TPS62933DRLR
+    - 600 available at JLC
+    - $0.62
+    - C3200405
+- [TPS54302](https://www.ti.com/lit/ds/symlink/tps54302.pdf)
+  - Cheap, ubiquituous

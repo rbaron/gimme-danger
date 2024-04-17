@@ -9,28 +9,44 @@ esp32:
   framework:
     type: esp-idf
 
-api:
-  encryption:
-    key: !secret homeassistant_enc_key
+# api:
+#   encryption:
+#     key: !secret homeassistant_enc_key
 
-ota:
-  password: !secret ota_password
+# ota:
+#   password: !secret ota_password
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_pass
-  # enable_on_boot: false
+# wifi:
+#   ssid: !secret wifi_ssid
+#   password: !secret wifi_pass
+#   # enable_on_boot: false
 
 # Enable logging
-# logger:
-#   hardware_uart: UART0
-#   level: ERROR
+logger:
+  hardware_uart: UART0
+  level: WARN
+  # logs:
+  #   ledc.output: WARN
+  #   light: WARN
+  #   api: WARN
+  #   api.connection: WARN
+  #   logger: WARN
+  #   ota: WARN
+  #   wifi: WARN
+  #   i2c.arduino: WARN
+  #   # i2c.idf: WARN
+  #   app: WARN
+  #   sensor: WARN
+  #   ina219: WARN
+  #   esp2.preferences: WARN
 
 i2c:
   sda: GPIO8
   scl: GPIO9
   # scan: False
+  frequency: 100kHz
   id: i2c_bus
+  # timeout: 50us
 
 output:
   - platform: gpio

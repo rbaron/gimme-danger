@@ -1,3 +1,13 @@
+# 2024-04-16
+According to [ESP32-S3 docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/i2c.html#inter-integrated-circuit-i2c), the i2c frequency should not exceed 400kHz!
+
+Issues with i2c on esp-idf:
+- i2c 1s hang if no Ack
+  - [esp-idf issue](https://github.com/espressif/esp-idf/issues/4999)
+  - Apparently fixed? https://github.com/espressif/esp-idf/issues/12079
+    - In [this commit](https://github.com/espressif/esp-idf/commit/793ca6d7a48120722e848f408e363345ee63fd09)
+
+
 # 2024-04-15
 
 I am using a FUSB302 and most projects use FUSB302B ??  WHY???

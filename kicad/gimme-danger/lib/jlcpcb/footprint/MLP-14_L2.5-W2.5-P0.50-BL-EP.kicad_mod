@@ -1,6 +1,6 @@
-(module "MLP-14_L2.5-W2.5-P0.50-BL-EP" (layer F.Cu) (tedit 65A58D95)
+(module "MLP-14_L2.5-W2.5-P0.50-BL-EP" (layer F.Cu) (tedit 661D5B82)
   (descr "MLP-14_L2.5-W2.5-P0.50-BL-EP footprint")
-  (tags "MLP-14_L2.5-W2.5-P0.50-BL-EP footprint C442699")
+  (tags "MLP-14_L2.5-W2.5-P0.50-BL-EP footprint C132291")
   (attr smd)
   (fp_text reference REF** (at 0 -3.326213) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
