@@ -1524,8 +1524,8 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at 0 1.27 0)
+			(property "Reference" "U4"
+				(at -7.62 -10.795 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1533,7 +1533,7 @@
 				)
 			)
 			(property "Value" "DC-84"
-				(at 0 -2.54 0)
+				(at -13.5891 0.6353 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1589,9 +1589,9 @@
 			)
 			(symbol "DC-84_0_1"
 				(arc
-					(start -10.0522 148.85)
-					(mid -9.1498 149.9681)
-					(end -10.2678 150.8706)
+					(start -10.2679 3.5503)
+					(mid -11.1703 2.4322)
+					(end -10.0523 1.5297)
 					(stroke
 						(width 0)
 						(type default)
@@ -7658,16 +7658,6 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 257.175) (xy 38.1 257.175)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ed13504-8c40-4514-bb38-4c4a279fd24a")
-	)
-	(wire
-		(pts
 			(xy 287.655 42.545) (xy 287.655 46.355)
 		)
 		(stroke
@@ -7895,6 +7885,16 @@
 			(type default)
 		)
 		(uuid "4fd0e74d-d19f-4096-bda5-b2c365ccbe05")
+	)
+	(wire
+		(pts
+			(xy 38.1 257.175) (xy 38.1 252.095)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50572194-ce24-4d67-96a8-cabc49a9aac5")
 	)
 	(wire
 		(pts
@@ -8205,6 +8205,16 @@
 			(type default)
 		)
 		(uuid "8cc72465-a824-43dc-a2d4-368a48f032a5")
+	)
+	(wire
+		(pts
+			(xy 35.56 257.175) (xy 38.1 257.175)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ecc04e2-0bfd-4017-b984-d1b1e73f3743")
 	)
 	(wire
 		(pts
@@ -8775,16 +8785,6 @@
 			(type default)
 		)
 		(uuid "e657f9fd-639d-4597-aba1-e1a5332749f6")
-	)
-	(wire
-		(pts
-			(xy 38.1 252.095) (xy 38.1 257.175)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ea62859b-9f69-4f61-a4ab-11ec265f1559")
 	)
 	(wire
 		(pts
@@ -12159,7 +12159,7 @@
 			)
 		)
 		(property "Value" "Conn_01x04_Pin"
-			(at 124.46 22.225 0)
+			(at 125.095 22.225 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12510,10 +12510,9 @@
 		(in_bom no)
 		(on_board yes)
 		(dnp yes)
-		(fields_autoplaced yes)
 		(uuid "390403b8-34ad-40e4-851b-e1efa0e644d7")
 		(property "Reference" "U4"
-			(at 26.289 105.41 0)
+			(at 25.4 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12521,7 +12520,7 @@
 			)
 		)
 		(property "Value" "DC-84"
-			(at 26.289 107.95 0)
+			(at 19.4309 259.0797 0)
 			(effects
 				(font
 					(size 1.27 1.27)
