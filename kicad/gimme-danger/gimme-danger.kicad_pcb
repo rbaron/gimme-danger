@@ -1024,7 +1024,7 @@
 				)
 			)
 		)
-		(attr exclude_from_pos_files exclude_from_bom)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
 		(fp_poly
 			(pts
 				(xy 0.555814 -2.531069) (xy 0.639635 -2.086445) (xy 0.94892 -1.958947) (xy 1.258206 -1.831449) (xy 1.629246 -2.083754)
@@ -20528,7 +20528,7 @@
 		(path "/e9f1f1f6-3fc7-4409-acc2-765e0ebcb0a0")
 		(sheetname "Root")
 		(sheetfile "gimme-danger.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom dnp)
 		(fp_circle
 			(center 0 0)
 			(end 0 -0.7)
@@ -21625,7 +21625,7 @@
 		(descr "Generated with KiBuzzard")
 		(tags "kb_params=eyJBbGlnbm1lbnRDaG9pY2UiOiAiTGVmdCIsICJDYXBMZWZ0Q2hvaWNlIjogIi8iLCAiQ2FwUmlnaHRDaG9pY2UiOiAiLyIsICJGb250Q29tYm9Cb3giOiAiVWJ1bnR1TW9uby1CIiwgIkhlaWdodEN0cmwiOiAiMSIsICJMYXllckNvbWJvQm94IjogIkYuU2lsa1MiLCAiTXVsdGlMaW5lVGV4dCI6ICIwLjAuM2EiLCAiUGFkZGluZ0JvdHRvbUN0cmwiOiAiNSIsICJQYWRkaW5nTGVmdEN0cmwiOiAiMiIsICJQYWRkaW5nUmlnaHRDdHJsIjogIjIiLCAiUGFkZGluZ1RvcEN0cmwiOiAiNSIsICJXaWR0aEN0cmwiOiAiIn0=")
 		(property "Reference" "kibuzzard-662001DF"
-			(at 0 3.891491 270)
+			(at 0 3.891491 -90)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "198df6d8-c976-4eb1-aa5b-f265cbfc74f4")
@@ -21637,7 +21637,7 @@
 			)
 		)
 		(property "Value" "G***"
-			(at 0 -3.891491 270)
+			(at 0 -3.891491 -90)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "c021a419-7608-48d8-a794-c2c9042c1bdf")
@@ -22473,7 +22473,7 @@
 		(path "/32a7e105-03ee-46a2-a899-3e349b4c7f8f")
 		(sheetname "Root")
 		(sheetfile "gimme-danger.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom dnp)
 		(fp_circle
 			(center 0 0)
 			(end 0 -0.7)
@@ -22825,7 +22825,7 @@
 		(path "/16fcec3f-ace1-4661-a359-0b8e73a2b7b6")
 		(sheetname "Root")
 		(sheetfile "gimme-danger.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom dnp)
 		(fp_circle
 			(center 0 0)
 			(end 0 -0.7)

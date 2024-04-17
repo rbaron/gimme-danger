@@ -7271,7 +7271,7 @@
 		(uuid "30b01efe-98cb-46d4-9b41-655ca2245a30")
 	)
 	(no_connect
-		(at 85.725 161.29)
+		(at 86.995 163.195)
 		(uuid "3133f05d-56e3-4ac6-b354-e030fc72fc6e")
 	)
 	(no_connect
@@ -8908,7 +8908,7 @@
 	)
 	(text "ESD Protection"
 		(exclude_from_sim no)
-		(at 73.025 150.495 0)
+		(at 74.295 152.4 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8938,6 +8938,16 @@
 			(justify left bottom)
 		)
 		(uuid "0c187532-ef97-46cc-8798-e601c8cf7996")
+	)
+	(text "50V"
+		(exclude_from_sim no)
+		(at 293.37 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "12390a1e-0d21-46cb-870c-c8a4d893e5a2")
 	)
 	(text "Current Sensor"
 		(exclude_from_sim no)
@@ -9027,6 +9037,16 @@
 		)
 		(uuid "69ce2c51-9ee3-46eb-ac07-de751a96bf62")
 	)
+	(text "50V"
+		(exclude_from_sim no)
+		(at 333.375 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "7a28c1a2-4b5b-4d4e-8e2d-b2d9607f3d9d")
+	)
 	(text "ESP32-S3"
 		(exclude_from_sim no)
 		(at 27.94 25.4 0)
@@ -9070,6 +9090,26 @@
 			(justify left bottom)
 		)
 		(uuid "f1a72ca7-abca-4f29-9d37-0e28fc96d91f")
+	)
+	(text "50V"
+		(exclude_from_sim no)
+		(at 259.08 149.225 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f470d860-19d8-4f92-b5f1-94f63214db77")
+	)
+	(text "50V"
+		(exclude_from_sim no)
+		(at 272.415 149.225 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f5d0ef94-dd6b-456c-8416-332e1ea5ba74")
 	)
 	(global_label "CH4"
 		(shape input)
@@ -9139,7 +9179,7 @@
 	)
 	(global_label "D-"
 		(shape input)
-		(at 78.105 186.69 270)
+		(at 79.375 188.595 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9149,7 +9189,7 @@
 		)
 		(uuid "0a7f85ad-ce05-4def-8bc8-da22ccba7205")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.105 192.4382 90)
+			(at 79.375 194.3432 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9381,7 +9421,7 @@
 	)
 	(global_label "CC2"
 		(shape input)
-		(at 90.805 161.29 90)
+		(at 92.075 163.195 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9391,7 +9431,7 @@
 		)
 		(uuid "2b1279be-131c-488a-8f8e-afda87580833")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 90.805 154.6347 90)
+			(at 92.075 156.5397 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9733,7 +9773,7 @@
 	)
 	(global_label "D+"
 		(shape input)
-		(at 90.805 186.69 270)
+		(at 92.075 188.595 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9743,7 +9783,7 @@
 		)
 		(uuid "5ecb692d-2226-4bbf-be26-5f3c4e4e41f2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 90.805 192.4382 90)
+			(at 92.075 194.3432 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9799,7 +9839,7 @@
 	)
 	(global_label "CC1"
 		(shape input)
-		(at 78.105 161.29 90)
+		(at 79.375 163.195 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9809,7 +9849,7 @@
 		)
 		(uuid "637443ad-57a2-461f-80ae-106fbbe895ce")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.105 154.6347 90)
+			(at 79.375 156.5397 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11190,7 +11230,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "16fcec3f-ace1-4661-a359-0b8e73a2b7b6")
 		(property "Reference" "TP4"
 			(at 66.675 240.03 90)
@@ -12259,7 +12299,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "32a7e105-03ee-46a2-a899-3e349b4c7f8f")
 		(property "Reference" "TP3"
 			(at 66.675 237.49 90)
@@ -17713,7 +17753,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 83.185 186.69 0)
+		(at 84.455 188.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17721,7 +17761,7 @@
 		(dnp no)
 		(uuid "cad78758-9fa8-4c4f-ab3a-9c497baa625b")
 		(property "Reference" "#PWR05"
-			(at 83.185 193.04 0)
+			(at 84.455 194.945 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17730,7 +17770,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 83.82 191.135 0)
+			(at 85.09 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17738,7 +17778,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 83.185 186.69 0)
+			(at 84.455 188.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17747,7 +17787,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 83.185 186.69 0)
+			(at 84.455 188.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17756,7 +17796,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 83.185 186.69 0)
+			(at 84.455 188.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19045,7 +19085,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "e9f1f1f6-3fc7-4409-acc2-765e0ebcb0a0")
 		(property "Reference" "TP2"
 			(at 66.675 234.95 90)
@@ -19263,7 +19303,7 @@
 	)
 	(symbol
 		(lib_id "TPD4E1U06DCKR:TPD4E1U06DCKR")
-		(at 85.725 173.99 0)
+		(at 86.995 175.895 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -19272,7 +19312,7 @@
 		(fields_autoplaced yes)
 		(uuid "ede0e3af-2394-496c-841a-b6fdcc545987")
 		(property "Reference" "U3"
-			(at 102.235 173.355 0)
+			(at 103.505 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19281,7 +19321,7 @@
 			)
 		)
 		(property "Value" "TPD4E1U06DCKR"
-			(at 102.235 175.895 0)
+			(at 103.505 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19290,7 +19330,7 @@
 			)
 		)
 		(property "Footprint" "footprint:SC-70-6_L2.2-W1.3-P0.65-LS2.1-BL"
-			(at 85.725 184.15 0)
+			(at 86.995 186.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19300,7 +19340,7 @@
 			)
 		)
 		(property "Datasheet" "https://item.szlcsc.com/166724.html"
-			(at 83.439 173.863 0)
+			(at 84.709 175.768 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19310,7 +19350,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 85.725 173.99 0)
+			(at 86.995 175.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19319,7 +19359,7 @@
 			)
 		)
 		(property "LCSC" "C194628"
-			(at 85.725 173.99 0)
+			(at 86.995 175.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
