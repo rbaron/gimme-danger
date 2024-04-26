@@ -1,44 +1,47 @@
 esphome:
-  name: gimmedanger3
-  friendly_name: Gimme Danger!! 3
+  name: gimmedanger1
+  friendly_name: Gimme Danger!! 1
 
 esp32:
   board: esp32-s3-devkitc-1
   flash_size: 4MB
   # framework:
   #   type: esp-idf
-  #   # version: recommended
+  # #   version: recommended
 
-api:
-  encryption:
-    key: !secret homeassistant_enc_key
+# api:
+#   encryption:
+#     key: !secret homeassistant_enc_key
 
-ota:
-  password: !secret ota_password
+# ota:
+#   password: !secret ota_password
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_pass
-  enable_on_boot: true
+# wifi:
+#   ssid: !secret wifi_ssid
+#   password: !secret wifi_pass
+#   enable_on_boot: true
 
 i2c:
-  sda: GPIO8
-  scl: GPIO9
-  # scan: False
+  # sda: GPIO8
+  # scl: GPIO9
+  # sda: GPIO21
+  sda: GPIO3
+  scl: GPIO18
+  scan: False
   id: i2c_bus
-#   # frequency: 100kHz
-#   # frequency: 100kHz
-#   # frequency: 200kHz
-#   # frequency: 10kHz
-#   # frequency: 1000kHz
+  # frequency: 100kHz
+  # frequency: 100kHz
+  # frequency: 200kHz
+  # frequency: 10kHz
+  # frequency: 1000kHz
 
 # Enable logging
 logger:
   # level: VERBOSE
   # By default, ESP32-S3 uses USB-CDC for logging.
   hardware_uart: UART0
-  # level: WARN
   level: WARN
+  # level: ERROR
   # logs:
   #   ledc.output: WARN
   #   light: WARN
@@ -70,21 +73,21 @@ output:
       number: 14
       mode: output
     id: red_led
-  - platform: ledc
-    id: output_ch1
-    pin: GPIO48
-  - platform: ledc
-    id: output_ch2
-    pin: GPIO47
-  - platform: ledc
-    id: output_ch3
-    pin: GPIO21
-  - platform: ledc
-    id: output_ch4
-    pin: GPIO38
-  # - platform: gpio
+  # - platform: ledc
   #   id: output_ch1
   #   pin: GPIO48
+  # - platform: ledc
+  #   id: output_ch2
+  #   pin: GPIO47
+  # - platform: ledc
+  #   id: output_ch3
+  #   pin: GPIO21
+  # - platform: ledc
+  #   id: output_ch4
+  #   pin: GPIO38
+  - platform: gpio
+    id: output_ch1
+    pin: GPIO48
 
 switch:
   - platform: gpio
@@ -115,8 +118,9 @@ sensor:
   #   update_interval: 500ms
 
 fusb302:
-  interrupt_pin: GPIO10
+  # interrupt_pin: GPIO10
   voltage: 11000 mV
+  # voltage: 12000 mV
   current: 1000 mA
   on_pd_negotiation_success:
     then:
@@ -135,22 +139,22 @@ fusb302:
           ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
       # - wifi.enable
 
-light:
-  - platform: rgbw
-    # restore_mode: RESTORE_DEFAULT_OFF
-    name: LED Strip
-    red: output_ch1
-    green: output_ch2
-    blue: output_ch3
-    white: output_ch4
+# light:
+#   # - platform: rgbw
+#   #   # restore_mode: RESTORE_DEFAULT_OFF
+#   #   name: LED Strip
+#   #   red: output_ch1
+#   #   green: output_ch2
+#   #   blue: output_ch3
+#   #   white: output_ch4
 
-  # - platform: monochromatic
-  #   name: Light Channel 1
-  #   id: light_ch1
-  #   output: output_ch1
+#   - platform: monochromatic
+#     name: Light Channel 1
+#     id: light_ch1
+#     output: output_ch1
 
-  # effects:
-  #   flicker:
+# effects:
+#   flicker:
 # - platform: monochromatic
 #   name: Light Channel 2
 #   id: light_ch2
