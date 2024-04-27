@@ -1,0 +1,296 @@
+esphome:
+  name: gimmedanger003a1
+  friendly_name: Gimme Danger!! 0.0.3a 1
+
+esp32:
+  board: esp32-s3-devkitc-1
+  flash_size: 4MB
+  # framework:
+  #   type: esp-idf
+  # #   version: recommended
+
+api:
+  encryption:
+    key: !secret homeassistant_enc_key
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  enable_on_boot: true
+
+i2c:
+  - id: i2c_bus_fusb302
+    sda: GPIO7
+    scl: GPIO6
+    scan: False
+    frequency: 100kHz
+  - id: i2c_bus_ina
+    sda: GPIO11
+    scl: GPIO10
+    scan: False
+    frequency: 400kHz
+
+# Enable logging
+logger:
+  # level: VERBOSE
+  # By default, ESP32-S3 uses USB-CDC for logging.
+  hardware_uart: UART0
+  level: WARN
+  # level: ERROR
+  # logs:
+  #   ledc.output: WARN
+  #   light: WARN
+  #   api: WARN
+  #   api.connection: WARN
+  #   logger: WARN
+  #   ota: WARN
+  #   wifi: WARN
+  #   i2c.arduino: WARN
+  #   app: WARN
+  #   sensor: WARN
+  #   ina219: WARN
+  #   esp2.preferences: WARN
+  # # sensor: WARN
+
+output:
+  - platform: gpio
+    pin:
+      number: 13
+      mode: output
+    id: yellow_led
+  - platform: gpio
+    pin:
+      number: 14
+      mode: output
+    id: red_led
+  - platform: ledc
+    id: output_ch1
+    pin: GPIO48
+  # - platform: ledc
+  #   id: output_ch2
+  #   pin: GPIO47
+  # - platform: ledc
+  #   id: output_ch3
+  #   pin: GPIO21
+  # - platform: ledc
+  #   id: output_ch4
+  #   pin: GPIO38
+  # - platform: gpio
+  #   id: output_ch1
+  #   pin: GPIO48
+
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: load_switch
+    name: Load Switch
+    icon: mdi:flash
+
+sensor:
+  - id: ina219_sensor
+    platform: ina219
+    i2c_id: i2c_bus_ina
+    address: 0x40
+    shunt_resistance: 0.01 ohm
+    current:
+      id: ina219_current
+      name: "Current"
+    power:
+      name: "Power"
+    bus_voltage:
+      id: ina219_load_voltage
+      name: "Load Voltage"
+    shunt_voltage:
+      name: "Shunt Voltage"
+    max_voltage: 28.0V
+    max_current: 5A
+    update_interval: 500ms
+
+fusb302:
+  i2c_id: i2c_bus_fusb302
+  # interrupt_pin: GPIO5
+  voltage: 11500 mV
+  # voltage: 12000 mV
+  current: 1000 mA
+  on_pd_negotiation_success:
+    then:
+      - output.turn_on: yellow_led
+      - output.turn_off: red_led
+      - switch.turn_on: load_switch
+      - lambda: |-
+          ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+      # - wifi.enable
+  on_pd_negotiation_failure:
+    then:
+      - output.turn_off: yellow_led
+      - output.turn_on: red_led
+      - switch.turn_off: load_switch
+      - lambda: |-
+          ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
+      # - wifi.enable
+
+light:
+  # - platform: rgbw
+  #   # restore_mode: RESTORE_DEFAULT_OFF
+  #   name: LED Strip
+  #   red: output_ch1
+  #   green: output_ch2
+  #   blue: output_ch3
+  #   white: output_ch4
+  - platform: monochromatic
+    name: Light Channel 1
+    id: light_ch1
+    output: output_ch1
+# effects:
+#   flicker:
+# - platform: monochromatic
+#   name: Light Channel 2
+#   id: light_ch2
+#   output: output_ch2
+#   effects:
+#     flicker:
+# - platform: monochromatic
+#   name: Light Channel 3
+#   id: light_ch3
+#   output: output_ch3
+#   effects:
+#     flicker:
+# - platform: monochromatic
+#   name: Light Channel 4
+#   id: light_ch4
+#   output: output_ch4
+#   effects:
+#     flicker:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      inverted: True
+      mode:
+        input: true
+        pullup: true
+    name: Boot Button
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    on_press:
+      then:
+        # - logger.log: "Boot button pressed!"
+        # - output.turn_on: output_ch1
+        - display.page.show_next: oled_display
+        - component.update: oled_display
+
+graph:
+  - id: current_graph
+    sensor: ina219_current
+    duration: 10s
+    width: 70
+    height: 32
+    line_thickness: 1
+    y_grid: 0.1
+    min_value: 0
+
+animation:
+  - file: ../assets/gimme-danger-plug-wave.gif
+    id: energy_animation
+  - file: ../assets/gimme-danger-load-off.gif
+    id: load_off_animation
+
+display:
+  - id: oled_display
+    platform: ssd1306_i2c
+    i2c_id: i2c_bus_ina
+    model: "SSD1306 128x32"
+    address: 0x3C
+    update_interval: 100ms
+    pages:
+      - id: screen_splash0
+        lambda: |-
+          // do nothing.
+      - id: screen_splash1
+        lambda: |-
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "GIMME");
+      - id: screen_splash2
+        lambda: |-
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "DANGER");
+      - id: screen_splash3
+        lambda: |-
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "!!");
+      - id: screen_state
+        lambda: |-
+          if (id(ina219_load_voltage).has_state()) {
+            it.printf(0, 0, id(font_small), TextAlign::TOP_LEFT, "%3.0fV ", id(ina219_load_voltage).state);
+          }
+          if (id(ina219_current).has_state()) {
+            if (id(ina219_current).state < 1.0f) {
+              it.printf(0, 15, id(font_small), TextAlign::TOP_LEFT, "%3.0fmA", 1000.0f * id(ina219_current).state);
+            } else {
+              it.printf(0, 15, id(font_small), TextAlign::TOP_LEFT, "%1.1f A", id(ina219_current).state);
+            }
+          }
+          if (id(load_switch).state) {
+            it.image(it.get_width() / 2, 0 , id(energy_animation));
+            id(energy_animation).next_frame();
+          } else {
+            it.image(it.get_width() / 2, 0 , id(load_off_animation));
+            id(load_off_animation).next_frame();
+          }
+      - id: screen_current_graph
+        lambda: |-
+          if (id(ina219_current).has_state()) {
+            if (id(ina219_current).state < 1.0f) {
+              it.printf(0, it.get_height() / 2, id(font_small), TextAlign::CENTER_LEFT, "%3.0fmA", 1000.0f * id(ina219_current).state);
+            } else {
+              it.printf(0, it.get_height() / 2, id(font_small), TextAlign::CENTER_LEFT, "%1.1f A", id(ina219_current).state);
+            }
+          }
+          it.graph(it.get_width() - id(current_graph).get_width(), (it.get_height() - id(current_graph).get_height()) / 2 , id(current_graph));
+
+interval:
+  - interval: 1s
+    startup_delay: 0s
+    then:
+      - if:
+          condition:
+            or:
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash0
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash1
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash2
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash3
+          then:
+            - display.page.show_next: oled_display
+            - component.update: oled_display
+
+font:
+  # - file: "gfonts://Roboto+Mono"
+  #   id: font_small
+  #   size: 18
+  - file: "gfonts://Ubuntu+Mono"
+    id: font_small
+    size: 18
+  # - file: "gfonts://Fira+Mono"
+  #   id: font_small
+  #   size: 16
+  # - file: "gfonts://VT323"
+  #   id: font_small
+  #   size: 20
+  # - file: "../fonts/font_free_mono_14/font.pcf"
+  #   id: font_small
+  # - file: "gfonts://Roboto"
+  #   id: font_large
+  #   size: 30
+  - file: "gfonts://Faster+One"
+    id: font_faster
+    size: 25

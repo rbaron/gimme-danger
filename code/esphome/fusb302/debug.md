@@ -1,3 +1,9 @@
+# 2024-04-26
+# gimme danger 0.0.3a 1
+Running with WiFi + OTA + single PWM channel + no interrupts + single i2c @ 100kHz (no INA nor OLED). Still running after 1h20 with ZERO ERRORS!!
+
+Adding the INA sensor.
+
 # 2024-04-16
 According to [ESP32-S3 docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/i2c.html#inter-integrated-circuit-i2c), the i2c frequency should not exceed 400kHz!
 
