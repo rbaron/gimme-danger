@@ -1,0 +1,14 @@
+substitutions:
+  device_id: "2"
+
+packages:
+  common: !include common.yaml
+  oled: !include common-oled.yaml
+  rgbw: !include common-rgbw.yaml
+
+logger:
+  level: INFO
+
+fusb302:
+  id: fusb302_id
+  voltage: 11000 mV
