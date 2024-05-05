@@ -19,18 +19,6 @@ esp32:
   #   type: esp-idf
   # #   version: recommended
 
-# api:
-#   encryption:
-#     key: !secret homeassistant_enc_key
-
-# ota:
-#   password: !secret ota_password
-
-# wifi:
-#   ssid: !secret wifi_ssid
-#   password: !secret wifi_pass
-#   # enable_on_boot: false
-
 i2c:
   - id: i2c_bus_fusb302
     sda: GPIO7

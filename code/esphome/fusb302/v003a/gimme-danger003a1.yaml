@@ -5,10 +5,10 @@ packages:
   common: !include common.yaml
   # pot: !include common-pot.yaml
   oled: !include common-oled.yaml
-  # rgbw: !include common-rgbw.yaml
+  wifi: !include common-wifi.yaml
 
 logger:
-  level: WARN
+  level: INFO
 
 fusb302:
   id: fusb302_id

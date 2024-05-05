@@ -37,7 +37,7 @@ display:
       - id: screen_state
         lambda: |-
           if (id(ina219_load_voltage).has_state()) {
-            it.printf(0, 0, id(font_small), TextAlign::TOP_LEFT, "%3.0fV ", id(ina219_load_voltage).state);
+            it.printf(0, 0, id(font_small), TextAlign::TOP_LEFT, "%3.1fV ", id(ina219_load_voltage).state);
           }
           if (id(ina219_current).has_state()) {
             if (id(ina219_current).state < 1.0f) {

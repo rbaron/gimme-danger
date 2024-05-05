@@ -1,0 +1,10 @@
+api:
+  encryption:
+    key: !secret homeassistant_enc_key
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
