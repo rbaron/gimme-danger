@@ -87,7 +87,7 @@ fusb302:
   id: fusb302_id
   i2c_id: i2c_bus_fusb302
   interrupt_pin: GPIO5
-  voltage: 12000 mV
+  voltage: 5000 mV
   current: 1000 mA
   start_power_negotiation_on_boot: false
   on_pd_negotiation_success:

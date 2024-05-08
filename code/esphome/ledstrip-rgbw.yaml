@@ -8,7 +8,7 @@ packages:
 
 fusb302:
   id: fusb302_id
-  voltage: 12000 mV
+  voltage: 11000 mV
   current: 1000 mA
 
 light:

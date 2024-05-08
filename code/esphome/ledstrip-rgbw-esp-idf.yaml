@@ -6,14 +6,29 @@ packages:
   oled: !include common/oled.yaml
   wifi: !include common/wifi.yaml
 
+esphome:
+  name: gimmedanger003a${gimme_danger_device_id}
+  friendly_name: Gimme Danger!! 0.0.3a ${gimme_danger_device_id}
+  platformio_options:
+    board_build.flash_mode: dio
+    board_build.f_flash: 40000000L
+    board_build.flash_size: 4MB
+
 esp32:
+  board: esp32-s3-devkitc-1
+  flash_size: 4MB
   framework:
     type: esp-idf
+    sdkconfig_options:
+      CONFIG_COMPILER_OPTIMIZATION_SIZE: y
+
+logger:
+  level: ERROR
 
 fusb302:
   id: fusb302_id
-  voltage: 12000 mV
-  current: 1000 mA
+  voltage: 11000 mV
+  current: 500 mA
 
 light:
   - platform: rgbw
