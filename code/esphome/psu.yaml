@@ -1,11 +1,8 @@
 substitutions:
-  device_id: "2"
+  gimme_danger_device_id: "2"
 
 packages:
-  common: !include common.yaml
-
-logger:
-  level: INFO
+  common: !include common/gimme-danger.yaml
 
 fusb302:
   id: fusb302_id
@@ -53,7 +50,7 @@ binary_sensor:
         - fusb302.set_voltage_requirement:
             id: fusb302_id
             voltage: !lambda |-
-              ESP_LOGE("Button Press", "Will set voltage to %.2f", id(voltage_selector).state);
+              ESP_LOGW("Button Press", "Will set voltage to %.2f", id(voltage_selector).state);
               return id(voltage_selector).state;
 
 sensor:

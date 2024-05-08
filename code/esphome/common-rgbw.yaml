@@ -1,7 +1,0 @@
-light:
-  - platform: rgbw
-    name: LED Strip
-    red: output_ch1
-    green: output_ch2
-    blue: output_ch3
-    white: output_ch4

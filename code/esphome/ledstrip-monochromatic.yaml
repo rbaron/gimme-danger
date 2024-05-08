@@ -1,13 +1,10 @@
 substitutions:
-  device_id: "4"
+  gimme_danger_device_id: "4"
 
 packages:
-  common: !include common.yaml
-  oled: !include common-oled.yaml
-  wifi: !include common-wifi.yaml
-
-logger:
-  level: INFO
+  gimme_danger: !include common/gimme-danger.yaml
+  oled: !include common/oled.yaml
+  wifi: !include common/wifi.yaml
 
 fusb302:
   id: fusb302_id

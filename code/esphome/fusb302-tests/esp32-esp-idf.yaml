@@ -1,3 +1,4 @@
+# Tests the fusb302 component on a regular ESP32 board with ESP-IDF framework.
 esphome:
   name: esp32-fusb302-test
   friendly_name: ESP32 FUSB302 Test

@@ -1,0 +1,1 @@
+This directory contains tests of the fusb302 component for other platforms than the GIMME DANGER!! board.

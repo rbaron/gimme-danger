@@ -9,9 +9,9 @@ graph:
     min_value: 0
 
 animation:
-  - file: ../assets/gimme-danger-plug-wave.gif
+  - file: assets/gimme-danger-plug-wave.gif
     id: energy_animation
-  - file: ../assets/gimme-danger-load-off.gif
+  - file: assets/gimme-danger-load-off.gif
     id: load_off_animation
 
 display:
@@ -33,7 +33,7 @@ display:
           it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "DANGER");
       - id: screen_splash3
         lambda: |-
-          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "!! ${device_id}");
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "!! ${gimme_danger_device_id}");
       - id: screen_state
         lambda: |-
           if (id(ina219_load_voltage).has_state()) {

@@ -1,13 +1,13 @@
 esphome:
-  name: gimmedanger003a${device_id}
-  friendly_name: Gimme Danger!! 0.0.3a ${device_id}
+  name: gimmedanger003a${gimme_danger_device_id}
+  friendly_name: Gimme Danger!! 0.0.3a ${gimme_danger_device_id}
   on_boot:
     - logger.log:
-        format: "Gimme Danger!! 0.0.3a ${device_id}"
+        format: "Gimme Danger!! 0.0.3a ${gimme_danger_device_id}"
         level: WARN
     - delay: 500ms
     - logger.log:
-        format: "Will start PD negotiation"
+        format: "Starting PD negotiation"
         level: WARN
     - fusb302.start_power_negotiation:
         id: fusb302_id
@@ -15,9 +15,6 @@ esphome:
 esp32:
   board: esp32-s3-devkitc-1
   flash_size: 4MB
-  # framework:
-  #   type: esp-idf
-  # #   version: recommended
 
 i2c:
   - id: i2c_bus_fusb302
@@ -31,27 +28,9 @@ i2c:
     scan: False
     frequency: 400kHz
 
-# Enable logging
 logger:
-  # level: VERBOSE
-  # By default, ESP32-S3 uses USB-CDC for logging.
   hardware_uart: UART0
-  level: WARN
-  # level: ERROR
-  # logs:
-  #   ledc.output: WARN
-  #   light: WARN
-  #   api: WARN
-  #   api.connection: WARN
-  #   logger: WARN
-  #   ota: WARN
-  #   wifi: WARN
-  #   i2c.arduino: WARN
-  #   app: WARN
-  #   sensor: WARN
-  #   ina219: WARN
-  #   esp2.preferences: WARN
-  # # sensor: WARN
+  level: INFO
 
 output:
   - platform: gpio
@@ -116,9 +95,6 @@ fusb302:
       - output.turn_on: yellow_led
       - output.turn_off: red_led
       - switch.turn_on: load_switch
-      # - lambda: |-
-      #     ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
-      # - wifi.enable
   on_pd_negotiation_failure:
     then:
       - output.turn_off: yellow_led
@@ -126,4 +102,3 @@ fusb302:
       - switch.turn_off: load_switch
       - lambda: |-
           ESP_LOGW("fusb302_trigger", "PD negotiation failure outcome: %d", success);
-      # - wifi.enable
