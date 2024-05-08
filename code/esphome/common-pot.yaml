@@ -1,0 +1,25 @@
+sensor:
+  - platform: adc
+    pin: GPIO8
+    name: "Voltage Selector"
+    update_interval: 100ms
+    attenuation: auto
+    filters:
+      - clamp:
+          min_value: 0
+          max_value: 3.1
+      - sliding_window_moving_average:
+          window_size: 10
+          send_every: 10
+      - calibrate_linear:
+          - 0.0 -> 0.0
+          - 3.1 -> 15.0
+      - round: 1
+    on_value:
+      then:
+        - lambda: |-
+            ESP_LOGE("Voltage Selector", "Voltage: %.2f", x);
+        - fusb302.set_voltage_requirement:
+            id: fusb302_id
+            voltage: !lambda |-
+              return x;

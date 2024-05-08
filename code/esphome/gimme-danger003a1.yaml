@@ -1,0 +1,25 @@
+substitutions:
+  device_id: "1"
+
+packages:
+  common: !include common.yaml
+  # pot: !include common-pot.yaml
+  oled: !include common-oled.yaml
+  wifi: !include common-wifi.yaml
+
+logger:
+  level: INFO
+
+fusb302:
+  id: fusb302_id
+  # voltage: 28000 mV
+  voltage: 11000 mV
+  # voltage: 9000 mV
+
+light:
+  - platform: monochromatic
+    name: Light Channel 1
+    id: light_ch1
+    output: output_ch1
+    effects:
+      flicker:

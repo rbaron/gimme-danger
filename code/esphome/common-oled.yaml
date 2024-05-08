@@ -1,0 +1,113 @@
+graph:
+  - id: current_graph
+    sensor: ina219_current
+    duration: 10s
+    width: 70
+    height: 32
+    line_thickness: 1
+    y_grid: 0.1
+    min_value: 0
+
+animation:
+  - file: ../assets/gimme-danger-plug-wave.gif
+    id: energy_animation
+  - file: ../assets/gimme-danger-load-off.gif
+    id: load_off_animation
+
+display:
+  - id: oled_display
+    platform: ssd1306_i2c
+    i2c_id: i2c_bus_ina
+    model: "SSD1306 128x32"
+    address: 0x3C
+    update_interval: 100ms
+    pages:
+      - id: screen_splash0
+        lambda: |-
+          // do nothing.
+      - id: screen_splash1
+        lambda: |-
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "GIMME");
+      - id: screen_splash2
+        lambda: |-
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "DANGER");
+      - id: screen_splash3
+        lambda: |-
+          it.print(it.get_width() / 2, it.get_height() / 2, id(font_faster), TextAlign::CENTER, "!! ${device_id}");
+      - id: screen_state
+        lambda: |-
+          if (id(ina219_load_voltage).has_state()) {
+            it.printf(0, 0, id(font_small), TextAlign::TOP_LEFT, "%3.1fV ", id(ina219_load_voltage).state);
+          }
+          if (id(ina219_current).has_state()) {
+            if (id(ina219_current).state < 1.0f) {
+              it.printf(0, 15, id(font_small), TextAlign::TOP_LEFT, "%3.0fmA", 1000.0f * id(ina219_current).state);
+            } else {
+              it.printf(0, 15, id(font_small), TextAlign::TOP_LEFT, "%1.1f A", id(ina219_current).state);
+            }
+          }
+          if (id(load_switch).state) {
+            it.image(it.get_width() / 2, 0 , id(energy_animation));
+            id(energy_animation).next_frame();
+          } else {
+            it.image(it.get_width() / 2, 0 , id(load_off_animation));
+            id(load_off_animation).next_frame();
+          }
+      - id: screen_current_graph
+        lambda: |-
+          if (id(ina219_current).has_state()) {
+            if (id(ina219_current).state < 1.0f) {
+              it.printf(0, it.get_height() / 2, id(font_small), TextAlign::CENTER_LEFT, "%3.0fmA", 1000.0f * id(ina219_current).state);
+            } else {
+              it.printf(0, it.get_height() / 2, id(font_small), TextAlign::CENTER_LEFT, "%1.1f A", id(ina219_current).state);
+            }
+          }
+          it.graph(it.get_width() - id(current_graph).get_width(), (it.get_height() - id(current_graph).get_height()) / 2 , id(current_graph));
+
+interval:
+  - interval: 1s
+    startup_delay: 0s
+    then:
+      - if:
+          condition:
+            or:
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash0
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash1
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash2
+              - display.is_displaying_page:
+                  id: oled_display
+                  page_id: screen_splash3
+          then:
+            - display.page.show_next: oled_display
+            - component.update: oled_display
+
+font:
+  - file: "gfonts://Ubuntu+Mono"
+    id: font_small
+    size: 18
+  - file: "gfonts://Faster+One"
+    id: font_faster
+    size: 25
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      inverted: True
+      mode:
+        input: true
+        pullup: true
+    name: Boot Button
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    on_press:
+      then:
+        - display.page.show_next: oled_display
+        - component.update: oled_display

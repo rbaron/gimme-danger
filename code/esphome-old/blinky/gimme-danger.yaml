@@ -1,0 +1,37 @@
+esphome:
+  name: gimmedanger
+  friendly_name: gimmedanger
+
+esp32:
+  board: esp32-s3-devkitc-1
+  flash_size: 4MB
+
+esp32_ble_tracker:
+
+text_sensor:
+  - platform: ble_scanner
+    name: "BLE Devices Scanner"
+
+i2c:
+  sda: GPIO8
+  scl: GPIO9
+  scan: True
+  id: i2c_bus
+
+# Enable logging
+logger:
+  level: VERBOSE
+
+output:
+  - platform: gpio
+    pin:
+      number: 13
+      mode: output
+    id: greenLED
+
+interval:
+  - interval: 500ms
+    then:
+      - output.turn_on: greenLED
+      - delay: 250ms
+      - output.turn_off: greenLED

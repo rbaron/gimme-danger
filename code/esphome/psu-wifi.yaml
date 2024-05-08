@@ -1,0 +1,61 @@
+substitutions:
+  device_id: "2"
+
+packages:
+  common: !include common.yaml
+  wifi: !include common-wifi.yaml
+
+logger:
+  level: INFO
+
+fusb302:
+  id: fusb302_id
+  # Safe default. Will be changed on button press.
+  voltage: 5000 mV
+  current: 500 mA
+
+display:
+  - id: oled_display
+    platform: ssd1306_i2c
+    i2c_id: i2c_bus_ina
+    model: "SSD1306 128x32"
+    address: 0x3C
+    update_interval: 100ms
+    pages:
+      - id: screen_state
+        lambda: |-
+          it.printf(0, 0, id(font_small), TextAlign::TOP_LEFT, "VSET");
+          it.printf(0, it.get_height() + 4, id(font_large), TextAlign::BOTTOM_LEFT, "%3.1fV", id(voltage_selector).state);
+          it.printf(it.get_width(), 0, id(font_small), TextAlign::TOP_RIGHT, "VBUS");
+          it.printf(it.get_width(), it.get_height() + 4, id(font_large), TextAlign::BOTTOM_RIGHT, "%3.1fV", id(ina219_load_voltage).state);
+
+font:
+  - file: "gfonts://Ubuntu+Mono"
+    id: font_small
+    size: 14
+  - file: "gfonts://Ubuntu+Mono"
+    id: font_large
+    size: 24
+
+button:
+  - platform: template
+    id: negotiate_usb_pd_voltage_button
+    name: "Negotiate USB-PD"
+    on_press:
+      then:
+        - fusb302.set_voltage_requirement:
+            id: fusb302_id
+            voltage: !lambda |-
+              ESP_LOGE("Button Press", "Will set voltage to %.2f", id(voltage_selector).state);
+              return id(voltage_selector).state;
+
+number:
+  - platform: template
+    id: voltage_selector
+    name: "Voltage Selector"
+    device_class: voltage
+    min_value: 4.0
+    max_value: 21.0
+    step: 0.1
+    initial_value: 5.0
+    optimistic: true
