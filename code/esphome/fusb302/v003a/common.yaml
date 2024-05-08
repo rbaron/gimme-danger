@@ -116,8 +116,8 @@ fusb302:
       - output.turn_on: yellow_led
       - output.turn_off: red_led
       - switch.turn_on: load_switch
-      - lambda: |-
-          ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+      # - lambda: |-
+      #     ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
       # - wifi.enable
   on_pd_negotiation_failure:
     then:
