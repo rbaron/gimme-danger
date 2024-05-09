@@ -41,6 +41,9 @@ fusb302:
 
 Full ESPHome configs for the demos below and more are available in the [`code/`](./code) directory.
 
+# ‼️ Safety disclaimer ‼️
+Configuration mistakes or software bugs may toast your devices if a high voltage is accidentally negotiated. While I have never run into these issues, even during development, be extra mindful of this fact then using this project or the `fusb302` component separately. Use it at your own risk.
+
 # Supported Power Delivery features
 * USB-PD 2.0 Fixed voltages -- 5V, 9V, 12V, 15V, 20V
 * USB-PD 3.0 Programmable Power Supply (PPS) -- 3.3V-21V, in 20mV steps (see the power supply demo below)
@@ -60,17 +63,20 @@ In the video below we see _GIMME DANGER!!_ connected to [Home Assistant](https:/
 ## 12V RGBW LED strip
 [![RGBW LED Strip](https://img.youtube.com/vi/ThnvIa4zbsM/maxres1.jpg)](https://youtu.be/ThnvIa4zbsM)
 
-## A simple programmable power supply
-We can also negotiate voltages on the fly from USB-PD 3.0 sources that offer Programmable Power Supply (PPS) modes. Here we have a potentiometer that sets the target voltage, and a button that triggers the USB-PD negotiation for that voltage.
+## A lil' programmable power supply
+What's fun is that we can negotiate voltages on the fly from USB-PD 3.0 sources that offer Programmable Power Supply (PPS) modes. Here we have a potentiometer that sets the target voltage, and a button that triggers the USB-PD negotiation for that voltage.
+
+A tiny power supply that's powered by the same USB-C charger as my [soldering iron](https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/) sounds like a neat portable tool.
 
 [![Power Supply](https://img.youtube.com/vi/3Acu_VfSuck/maxres1.jpg)](https://youtu.be/3Acu_VfSuck)
 
-# A Home Assistant controlled power supply
-As a display of the flexibility of ESPHome and Home Assistant, we can use _GIMME DANGER!!_ to make a WiFi-controlled power supply. This is probably a terrible idea,  but kind of neat.
+## A Home Assistant controlled power supply
+As a display of the flexibility of ESPHome and Home Assistant, we can use _GIMME DANGER!!_ to make a WiFi-controlled power supply. This is an objectively terrible idea, but it's not _GIMME SAFETY!!_ after all. Disregarding the risk of accidentally toasting our loads either via a misclick or a bug, this may be useful for automating the collection of I-V curves.
+
 [![Home Assistant Power Supply](https://img.youtube.com/vi/tXYciUaycYI/maxres1.jpg)](https://youtu.be/tXYciUaycYI)
 
 # Optional OLED display
-There are female pin headers on the board to connect an 0.91" OLED display like [this one from Aliexpress](https://aliexpress.com/item/1005004816561244.html). It's used to display the current voltage and current. There's also a cute animation when negotiation is succesfull -- you can see it in the demos above.
+There are female pin headers on the board to connect an 0.91" OLED display like [this one from Aliexpress](https://aliexpress.com/item/1005004816561244.html). It's used to display the running voltage and current. There's also a cute animation when negotiation is succesful -- you can see it in the demos above.
 
 # 3D printed case
 ![Case](./media/gimme-danger-case.jpg)
