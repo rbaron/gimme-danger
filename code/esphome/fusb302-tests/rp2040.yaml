@@ -1,21 +1,18 @@
 esphome:
   name: rp2040-fusb302-test
   friendly_name: rp2040 FUSB302 Test
-  on_boot:
-    - delay: 500ms
-    - logger.log:
-        format: "Will start PD negotiation"
-        level: WARN
-    # - fusb302.start_power_negotiation:
-    #     id: fusb302_id
 
 rp2040:
   board: rpipicow
   framework:
     platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
 
-# packages:
-#   wifi: !include ../common/wifi.yaml
+external_components:
+  - source:
+      type: git
+      url: https://github.com/rbaron/esphome
+      ref: fusb302
+    components: [fusb302]
 
 i2c:
   - id: i2c_bus_fusb302

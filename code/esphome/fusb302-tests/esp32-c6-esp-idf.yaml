@@ -16,6 +16,13 @@ esp32:
     version: 5.1.2
     platform_version: 6.5.0
 
+external_components:
+  - source:
+      type: git
+      url: https://github.com/rbaron/esphome
+      ref: fusb302
+    components: [fusb302]
+
 i2c:
   - id: i2c_bus_fusb302
     scl: 23
