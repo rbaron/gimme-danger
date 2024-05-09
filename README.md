@@ -2,7 +2,7 @@
 
 An open source [USB Power Delivery](https://en.wikipedia.org/wiki/USB_hardware#USB_Power_Delivery) trigger board and 5-channel PWM controller that runs [ESPHome](https://esphome.io).
 
-_GIMME DANGER!!_ negotiates up to 21 V and 3 A[^1] from a USB Power Delivery (USB-PD) capable source -- such as wall adapters and power banks -- and provides control for its 5 PWM channels. Each channel can be used to interface with LEDs, fans, motors and more. See below for some demos.
+_GIMME DANGER!!_ negotiates up to 21 V and 3 A[^1] from a USB Power Delivery (USB-PD) capable source -- such as common USB-C wall adapters/chargers and power banks -- and provides controls for its 5 PWM channels, optionally via [Home Assistant](https://home-assistant.io). Each channel can be used to interface with LEDs, motors and more. See below for some video demos.
 
 # Hardware
 ![PCB front](./media/gimme-danger-front.jpg)
@@ -10,7 +10,7 @@ _GIMME DANGER!!_ negotiates up to 21 V and 3 A[^1] from a USB Power Delivery (US
 * [FUSB302B](https://www.onsemi.com/products/interfaces/usb-type-c/fusb302b) USB-PD controller
 * [INA219](https://www.ti.com/product/INA219) current sensor
 * 5 output PWM channels
-* 2x5.5mm barrel jack for raw VBUS output
+* 2x5.5mm barrel jack for raw output voltage access
 * Optional OLED display
 
 The [`kicad/`](./kicad/) directory contains design files and fabrication files for [JLCPCB](https://jlcpcb.com) manufacturing and assembly. The big through-hole components (headers, power terminals) and the ESP32-S3 module are not included in the assembly, and expected to be soldered by hand.
@@ -46,13 +46,15 @@ Full ESPHome configs for the demos below and more are available in the [`code/`]
 * USB-PD 3.0 Programmable Power Supply (PPS) -- 3.3V-21V, in 20mV steps (see the power supply demo below)
 * USB-PD 3.1 Extended Power Range (EPR) Fixed PDOs -- 28V[^1]
 
-Support for USB-PD 3.1 Adjustable Voltage Supply (AVS) in EPR mode will let us pull 15-28V[^1]. It's not implemented because I don't have an AVS capable source to test.
+Support for USB-PD 3.1 Adjustable Voltage Supply (AVS) in EPR mode will let us pull 15-28V[^1]. Unfortunately it's still difficult to get our hands on EPR AVS capable sources to implement and test support for it, but in theory the heavy lifting is already done.
 
 # Some use cases & demos
 Below there are some demo videos. Click on the images to play.
 
 ## 12V LED strip
-Here we can see _GIMME DANGER!!_ connected to [Home Assistant](https://www.home-assistant.io) and controlling a 12V LED strip.
+The main motivation for this project was to power short runs of LED strips from USB-C chargers and control them via Home Assistant. Observing the maximum current and voltage[^1], it should be doable to light up a shelf, table, TV stand or any DYI project that requires only a couple of meters of 12V LED strips. Here [wled-calculator.github.io](https://wled-calculator.github.io/) should help with planning.
+
+In the video below we see _GIMME DANGER!!_ connected to [Home Assistant](https://www.home-assistant.io), controlling a short 12V LED strip.
 [![12V LED Strip](https://img.youtube.com/vi/a7QtX55lgi8/maxres1.jpg)](https://youtu.be/a7QtX55lgi8)
 
 ## 12V RGBW LED strip
