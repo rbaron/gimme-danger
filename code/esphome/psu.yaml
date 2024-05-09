@@ -4,12 +4,6 @@ substitutions:
 packages:
   common: !include common/gimme-danger.yaml
 
-fusb302:
-  id: fusb302_id
-  # Safe default. Will be changed on button press.
-  voltage: 5000 mV
-  current: 500 mA
-
 display:
   - id: oled_display
     platform: ssd1306_i2c

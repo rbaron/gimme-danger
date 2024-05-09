@@ -1,5 +1,5 @@
 substitutions:
-  gimme_danger_device_id: "4"
+  gimme_danger_device_id: "1"
 
 packages:
   gimme_danger: !include common/gimme-danger.yaml
@@ -8,7 +8,7 @@ packages:
 
 fusb302:
   id: fusb302_id
-  voltage: 11000 mV
+  voltage: 10500 mV
   current: 1000 mA
 
 light:

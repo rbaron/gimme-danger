@@ -30,7 +30,7 @@ i2c:
 
 logger:
   hardware_uart: UART0
-  level: WARN
+  level: INFO
 
 output:
   - platform: gpio
