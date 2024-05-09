@@ -1,7 +1,7 @@
 # Tests the fusb302 component on a regular ESP32 board with ESP-IDF framework.
 esphome:
-  name: esp32-fusb302-esp-idf-test
-  friendly_name: ESP32 FUSB302 esp-idf Test
+  name: esp32-fusb302-arduino-test
+  friendly_name: ESP32 FUSB302 Arduino Test
   on_boot:
     - delay: 500ms
     - logger.log:
@@ -13,7 +13,7 @@ esphome:
 esp32:
   board: nodemcu-32s
   framework:
-    type: esp-idf
+    type: arduino
 
 packages:
   wifi: !include ../common/wifi.yaml

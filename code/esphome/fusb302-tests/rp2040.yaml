@@ -1,42 +1,48 @@
 # Tests the fusb302 component on a regular ESP32 board with ESP-IDF framework.
 esphome:
-  name: esp32-fusb302-esp-idf-test
-  friendly_name: ESP32 FUSB302 esp-idf Test
+  name: rp2040-fusb302-test
+  friendly_name: rp2040 FUSB302 Test
   on_boot:
     - delay: 500ms
     - logger.log:
         format: "Will start PD negotiation"
         level: WARN
-    - fusb302.start_power_negotiation:
-        id: fusb302_id
+    # - fusb302.start_power_negotiation:
+    #     id: fusb302_id
 
-esp32:
-  board: nodemcu-32s
+rp2040:
+  board: rpipicow
   framework:
-    type: esp-idf
+    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
 
-packages:
-  wifi: !include ../common/wifi.yaml
+# packages:
+#   wifi: !include ../common/wifi.yaml
 
 i2c:
   - id: i2c_bus_fusb302
-    scl: GPIO25
-    sda: GPIO26
-    frequency: 100kHz
+    sda: 16
+    scl: 17
 
 logger:
-  level: INFO
+  level: DEBUG
+
+output:
+  - platform: gpio
+    pin:
+      number: 32
+      mode: output
+    id: LED
 
 fusb302:
   id: fusb302_id
   i2c_id: i2c_bus_fusb302
-  interrupt_pin: GPIO27
+  interrupt_pin: 15
   voltage: 11000 mV
   current: 1000 mA
-  start_power_negotiation_on_boot: false
   on_pd_negotiation_success:
     - lambda: |-
         ESP_LOGW("fusb302_trigger", "PD negotiation success outcome: %d", success);
+    - output.turn_on: LED
   on_pd_negotiation_failure:
     then:
       - lambda: |-
