@@ -78,4 +78,4 @@ The [`case/`](./case) directory contains a little 3D printable case. The PCB is 
 The hardware and associated design files are released under the [Creative Commons CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license. The code is released under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-[^1]: FUSB302B's typical max bus voltage is 21 V, with 28 V abosolute maximum. Each PWM channel is rated for 3 A. In theory the board supports up to 5 A, but has only been tested for 3 A in total so far.
+[^1]: FUSB302B's typical maximum voltage is 21 V, with 28 V as the absolute maximum. Each PWM channel is rated for 3 A. In theory the board supports up to 5 A, but a safer, better tested range is 21 V / 3 A in total.
