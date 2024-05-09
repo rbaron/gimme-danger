@@ -42,7 +42,7 @@ fusb302:
 Full ESPHome configs for the demos below and more are available in the [`code/`](./code) directory.
 
 # ‼️ Safety disclaimer ‼️
-Configuration mistakes or software bugs may toast your devices if a high voltage is accidentally negotiated. While I have never run into these issues, even during development, be extra mindful of this fact then using this project or the `fusb302` component separately. Use it at your own risk.
+Configuration mistakes or software bugs may toast your devices if a high voltage is accidentally negotiated. While I have never run into these issues, even during development, be extra mindful of this fact then using this project or the `fusb302` component separately. For all intents and purposes, this is an experimental project. Use it at your own risk.
 
 # Supported Power Delivery features
 * USB-PD 2.0 Fixed voltages -- 5V, 9V, 12V, 15V, 20V
@@ -66,7 +66,7 @@ In the video below we see _GIMME DANGER!!_ connected to [Home Assistant](https:/
 ## A lil' programmable power supply
 What's fun is that we can negotiate voltages on the fly from USB-PD 3.0 sources that offer Programmable Power Supply (PPS) modes. Here we have a potentiometer that sets the target voltage, and a button that triggers the USB-PD negotiation for that voltage.
 
-A tiny power supply that's powered by the same USB-C charger as my [soldering iron](https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/) sounds like a neat portable tool.
+A tiny, experimental and largely untested power supply that's powered by the same USB-C charger as my [soldering iron](https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/)? Straight into my toolbox.
 
 [![Power Supply](https://img.youtube.com/vi/3Acu_VfSuck/maxres1.jpg)](https://youtu.be/3Acu_VfSuck)
 
