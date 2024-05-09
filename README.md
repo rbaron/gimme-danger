@@ -18,9 +18,39 @@ The [`kicad/`](./kicad/) directory contains design files and fabrication files f
 # Software
 A custom `fusb302` component was implemented in ESPHome to support this project. It currently lives in its own fork on [github.com/rbaron/tree/fusb302](https://github.com/rbaron/esphome/tree/fusb302).
 
-Configs for the demos below and more are available in the [`code/`](./code) directory.
+Here's a minimal example of using our custom `fusb302` component with ESPHome:
+
+```yaml
+external_components:
+  - source:
+      type: git
+      url: https://github.com/rbaron/esphome
+      ref: fusb302
+    components: [fusb302]
+
+fusb302:
+  id: fusb302_id
+  i2c_id: i2c_bus_fusb302
+  interrupt_pin: GPIO5
+  voltage: 12000 mV
+  current: 1000 mA
+  on_pd_negotiation_success:
+    then:
+      - switch.turn_on: load_switch
+```
+
+Full ESPHome configs for the demos below and more are available in the [`code/`](./code) directory.
+
+# Supported Power Delivery features
+* USB-PD 2.0 Fixed voltages -- 5V, 9V, 12V, 15V, 20V
+* USB-PD 3.0 Programmable Power Supply (PPS) -- 3.3V-21V, in 20mV steps (see the power supply demo below)
+* USB-PD 3.1 Extended Power Range (EPR) Fixed PDOs -- 28V[^1]
+
+Support for USB-PD 3.1 Adjustable Voltage Supply (AVS) in EPR mode will let us pull 15-28V[^1]. It's not implemented because I don't have an AVS capable source to test.
 
 # Some use cases & demos
+Below there are some demo videos. Click on the images to play.
+
 ## 12V LED strip
 Here we can see _GIMME DANGER!!_ connected to [Home Assistant](https://www.home-assistant.io) and controlling a 12V LED strip.
 [![12V LED Strip](https://img.youtube.com/vi/a7QtX55lgi8/maxres1.jpg)](https://youtu.be/a7QtX55lgi8)
@@ -29,7 +59,7 @@ Here we can see _GIMME DANGER!!_ connected to [Home Assistant](https://www.home-
 [![RGBW LED Strip](https://img.youtube.com/vi/ThnvIa4zbsM/maxres1.jpg)](https://youtu.be/ThnvIa4zbsM)
 
 ## A simple programmable power supply
-We can also negotiate voltages on the fly from USB-PD 3.0 sources that offer . Here we have a potentiometer that sets the target voltage, and a button that triggers the USB-PD negotiation for that voltage.
+We can also negotiate voltages on the fly from USB-PD 3.0 sources that offer Programmable Power Supply (PPS) modes. Here we have a potentiometer that sets the target voltage, and a button that triggers the USB-PD negotiation for that voltage.
 
 [![Power Supply](https://img.youtube.com/vi/3Acu_VfSuck/maxres1.jpg)](https://youtu.be/3Acu_VfSuck)
 
@@ -41,7 +71,8 @@ As a display of the flexibility of ESPHome and Home Assistant, we can use _GIMME
 There are female pin headers on the board to connect an 0.91" OLED display like [this one from Aliexpress](https://aliexpress.com/item/1005004816561244.html). It's used to display the current voltage and current. There's also a cute animation when negotiation is succesfull -- you can see it in the demos above.
 
 # 3D printed case
-The [`case/`](./case) directory contains a very simply 3D printable case for _GIMME DANGER!!_. It's designed to be printed in two parts and assembled with 3 M2 screws and threaded inserts.
+![Case](./media/gimme-danger-case.jpg)
+The [`case/`](./case) directory contains a little 3D printable case. The PCB is optionally held in place by three M2 screws and threaded inserts.
 
 # License
 The hardware and associated design files are released under the [Creative Commons CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license. The code is released under the [MIT license](https://opensource.org/licenses/MIT).

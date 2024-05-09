@@ -17,6 +17,8 @@ animation:
 display:
   - id: oled_display
     platform: ssd1306_i2c
+    # We can change the display orientation here. Rotation in degrees.
+    # rotation: 180
     i2c_id: i2c_bus_ina
     model: "SSD1306 128x32"
     address: 0x3C
