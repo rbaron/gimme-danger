@@ -1,27 +1,25 @@
 esphome:
-  name: esp32-fusb302-arduino-test
-  friendly_name: ESP32 FUSB302 Arduino Test
+  name: esp32-c6-fusb302-esp-idf-test
   on_boot:
     - delay: 500ms
     - logger.log:
-        format: "Will start PD negotiation"
+        format: "Starting PD negotiation"
         level: WARN
     - fusb302.start_power_negotiation:
         id: fusb302_id
 
 esp32:
-  board: nodemcu-32s
+  board: esp32-c6-devkitm-1
+  variant: esp32c6
   framework:
-    type: arduino
-
-packages:
-  wifi: !include ../common/wifi.yaml
+    type: esp-idf
+    version: 5.1.2
+    platform_version: 6.5.0
 
 i2c:
   - id: i2c_bus_fusb302
-    scl: GPIO25
-    sda: GPIO26
-    frequency: 100kHz
+    scl: 23
+    sda: 22
 
 logger:
   level: INFO
@@ -29,7 +27,7 @@ logger:
 fusb302:
   id: fusb302_id
   i2c_id: i2c_bus_fusb302
-  interrupt_pin: GPIO27
+  interrupt_pin: 21
   voltage: 11000 mV
   current: 1000 mA
   start_power_negotiation_on_boot: false
