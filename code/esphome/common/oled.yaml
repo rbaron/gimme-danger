@@ -11,8 +11,10 @@ graph:
 animation:
   - file: assets/gimme-danger-plug-wave.gif
     id: energy_animation
+    type: BINARY
   - file: assets/gimme-danger-load-off.gif
     id: load_off_animation
+    type: BINARY
 
 display:
   - id: oled_display

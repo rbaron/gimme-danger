@@ -1,5 +1,5 @@
 substitutions:
-  gimme_danger_device_id: "4"
+  gimme_danger_device_id: "7"
 
 packages:
   gimme_danger: !include common/gimme-danger.yaml
